@@ -10,10 +10,19 @@
 
     <TextView
         android:id="@+id/name_text"
+        style="@style/NameStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="@string/jose"
-        android:textColor="@android:color/black"
-        android:textSize="@dimen/textSize" />
+        android:text="@string/jose" />
+
+    <ImageView
+        android:id="@+id/dogecoinIcon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/todo"
+        app:srcCompat="@drawable/dt_common_streams_streamserver"
+        tools:ignore="ImageContrastCheck" />
 </LinearLayout>

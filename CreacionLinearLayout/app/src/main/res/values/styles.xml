@@ -7,4 +7,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="NameStyle">
+        <item name="android:padding">@dimen/small_padding</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
 </resources>
