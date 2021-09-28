@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">02.3 ConstraintLayout using the Layout Editor</string>
+    <string name="box_one">Box One</string>
+    <string name="box_two">Box Two</string>
+</resources>
