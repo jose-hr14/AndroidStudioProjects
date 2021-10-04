@@ -27,9 +27,9 @@ class MainActivity : AppCompatActivity() {
 
                 if(nuevaFecha.verificarFecha())
                 {
-                    dia = Calendar.DAY_OF_MONTH - nuevaFecha.dia
-                    mes = Calendar.MONTH - nuevaFecha.mes
-                    anyo = Calendar.YEAR - nuevaFecha.anyo
+                    dia = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) - nuevaFecha.dia
+                    mes = Calendar.getInstance().get(Calendar.MONTH) + 1 - nuevaFecha.mes
+                    anyo = Calendar.getInstance().get(Calendar.YEAR) - nuevaFecha.anyo
 
                     if(dia < 0)
                     {
@@ -45,8 +45,8 @@ class MainActivity : AppCompatActivity() {
                     {
                         Toast.makeText(this,"La fecha introducida supera la actual", Toast.LENGTH_SHORT).show()
                     }
-                    //binding.edadTV.text = "" + dia + " " + mes + " " + anyo
-                    binding.edadTV.text = Calendar.YEAR.toString()
+                    binding.edadTV.text = anyo.toString()
+
                     binding.edadTV.visibility = View.VISIBLE
 
                 }
