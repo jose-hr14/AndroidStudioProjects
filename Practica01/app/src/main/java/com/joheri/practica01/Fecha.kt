@@ -1,5 +1,8 @@
 package com.joheri.practica01
 
+import android.widget.Toast
+import java.util.*
+
 class Fecha() {
 
     var dia: Int = 1
@@ -53,6 +56,28 @@ class Fecha() {
         }
 
         return false
+    }
+
+    fun calcularCumpleaños(): Int{
+        dia = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) - this.dia
+        mes = Calendar.getInstance().get(Calendar.MONTH) + 1 - this.mes
+        anyo = Calendar.getInstance().get(Calendar.YEAR) - this.anyo
+
+        if(dia < 0)
+        {
+            mes -= 1
+            dia *= -1
+        }
+        if(mes < 0)
+        {
+            anyo -= 1
+            mes *= -1
+        }
+        if(anyo < 0)
+        {
+            return 0
+        }
+        return anyo
     }
 
 
