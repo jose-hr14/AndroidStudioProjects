@@ -1,6 +1,5 @@
 package com.joheri.practica01
 
-import android.widget.Toast
 import java.util.*
 
 class Fecha() {
@@ -17,7 +16,7 @@ class Fecha() {
     }
 
 
-    fun esBisiesto(): Boolean{
+    private fun esBisiesto(): Boolean{
         if(anyo % 4 == 0)
         {
             if(anyo % 100 == 0)
@@ -58,10 +57,11 @@ class Fecha() {
         return false
     }
 
-    fun calcularCumpleaños(): Int{
-        dia = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) - this.dia
-        mes = Calendar.getInstance().get(Calendar.MONTH) + 1 - this.mes
-        anyo = Calendar.getInstance().get(Calendar.YEAR) - this.anyo
+    fun calcularEdad(): Int{
+        val fechaActual = Calendar.getInstance()
+        var dia = fechaActual.get(Calendar.DAY_OF_MONTH) - this.dia
+        var mes = fechaActual.get(Calendar.MONTH) + 1 - this.mes
+        var anyo = fechaActual.get(Calendar.YEAR) - this.anyo
 
         if(dia < 0)
         {
@@ -79,6 +79,7 @@ class Fecha() {
         }
         return anyo
     }
+
 
 
 
