@@ -12,13 +12,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
         android:ems="10"
-        android:hint="Introduzca el nombre"
+        android:hint="@string/introduzca_el_nombre"
+        android:hintTextColor="#757575"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         app:layout_constraintBaseline_toBaselineOf="@+id/nombreTV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/nombreTV"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/nombreTV"
@@ -26,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:text="Nombre:"
+        android:text="@string/nombre"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Fecha de nacimiento"
+        android:text="@string/fecha_de_nacimiento"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,14 +52,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="Mes"
+        android:hint="@string/mes"
+        android:hintTextColor="#757575"
         android:inputType="number"
         android:maxLength="2"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="@+id/diaPT"
         app:layout_constraintEnd_toStartOf="@+id/anyoPT"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/diaPT"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        tools:ignore="TextContrastCheck"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/anyoPT"
@@ -62,14 +71,17 @@
         android:layout_height="48dp"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="Año"
+        android:hint="@string/anyo"
+        android:hintTextColor="#757575"
         android:inputType="number"
         android:maxLength="4"
         app:layout_constraintBottom_toBottomOf="@+id/mesPT"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/mesPT"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        tools:ignore="TextContrastCheck"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/diaPT"
@@ -77,13 +89,16 @@
         android:layout_height="48dp"
         android:layout_marginTop="32dp"
         android:ems="10"
-        android:hint="Día"
+        android:hint="@string/dia"
+        android:hintTextColor="#757575"
+        android:importantForAutofill="no"
         android:inputType="number"
         android:maxLength="2"
         app:layout_constraintEnd_toStartOf="@+id/mesPT"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        tools:ignore="TextContrastCheck" />
 
     <RadioGroup
         android:id="@+id/radioGroup"
@@ -99,14 +114,14 @@
             android:id="@+id/masculinoRB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Masculino" />
+            android:text="@string/masculino" />
 
         <RadioButton
             android:id="@+id/femeninoRB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Femenino" />
+            android:text="@string/femenino" />
     </RadioGroup>
 
     <Button
@@ -114,7 +129,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Calcular"
+        android:text="@string/calcular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
