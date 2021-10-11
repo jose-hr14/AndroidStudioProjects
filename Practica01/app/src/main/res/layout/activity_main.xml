@@ -70,6 +70,7 @@
         android:layout_width="96dp"
         android:layout_height="48dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="@string/anyo"
         android:hintTextColor="#757575"
@@ -87,6 +88,7 @@
         android:id="@+id/diaPT"
         android:layout_width="96dp"
         android:layout_height="48dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="@string/dia"
@@ -96,6 +98,7 @@
         android:maxLength="2"
         app:layout_constraintEnd_toStartOf="@+id/mesPT"
         app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
         tools:ignore="TextContrastCheck" />
@@ -104,7 +107,7 @@
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
@@ -135,8 +138,9 @@
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
+        android:layout_width="409dp"
         android:layout_height="0dp"
+        android:background="#37000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -157,9 +161,10 @@
             android:id="@+id/característicaTV"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:backgroundTint="#B7FFFFFF"
+            android:background="#FFFFFF"
             android:gravity="center"
-            android:visibility="gone"
+            android:textSize="24sp"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
