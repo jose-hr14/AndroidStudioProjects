@@ -6,7 +6,6 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.joheri.practica02.databinding.ActivityMainBinding
 import java.io.*
 
 //José Hernández Riquelme
@@ -117,7 +116,7 @@ class MainActivity : AppCompatActivity()
 
     fun esconderTeclado() //Función para esconder el teclado al pulsar el botón
     {
-        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(this.currentFocus?.windowToken, 0)
     }
     fun enlazarBinding(): ActivityMainBinding //Función para enlazar la vista con el código

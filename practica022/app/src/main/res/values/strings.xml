@@ -10,13 +10,17 @@
     <string name="femenino">Femenino</string>
     <string name="calcular">Calcular</string>
     <string name="filename">historial.txt</string>
+    <string name="masculino">Masculino</string>
+    <string name="femenino">Femenino</string>
     <string name="fechaIncorrecta">La fecha introducida no es correcta</string>
     <string name="faltanDatos">No se han introducido todos los datos</string>
     <string name="articulo">\"Articulo: \"</string>
     <string name="codigo">\" Código: \"</string>
     <string name="precio">\" Precio: \"</string>
     <string name="ficheroNoExiste">No existe el fichero</string>
+    <string name="masculino">Masculino</string>
     <string name="niño">Niño</string>
+    <string name="femenino">Femenino</string>
     <string name="niña">Niña</string>
     <string name="adolescente">Adolescente</string>
     <string name="hombre">Hombre</string>
