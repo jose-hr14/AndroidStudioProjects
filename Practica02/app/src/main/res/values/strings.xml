@@ -9,4 +9,5 @@
     <string name="masculino">Masculino</string>
     <string name="femenino">Femenino</string>
     <string name="calcular">Calcular</string>
+    <string name="filename">historial.txt</string>
 </resources>

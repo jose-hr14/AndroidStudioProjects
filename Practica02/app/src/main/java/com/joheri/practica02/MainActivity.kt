@@ -7,6 +7,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.joheri.practica02.databinding.ActivityMainBinding
+import java.io.*
+
 //José Hernández Riquelme
 class MainActivity : AppCompatActivity()
 {
@@ -35,11 +37,11 @@ class MainActivity : AppCompatActivity()
 
                 if(binding.radioGroup.checkedRadioButtonId == binding.masculinoRB.id) //Aquí controlamos si el radio buttón
                 {
-                    genero = "M"
+                    genero = "Masculino"
                 }
                 else if(binding.radioGroup.checkedRadioButtonId == binding.femeninoRB.id) //seleccionado es masculino o femenino
                 {
-                    genero = "F"
+                    genero = "Femenino"
                 }
 
                 if(nuevaFecha.verificarFecha()) //Verificamos la fecha antes de mostrar la edad
@@ -51,6 +53,9 @@ class MainActivity : AppCompatActivity()
                     binding.edadTV.visibility = View.VISIBLE //Hacemos visible el textView
                     binding.caracterSticaTV.text = caracteristica //Escribimos la característica en el textView
                     binding.caracterSticaTV.visibility = View.VISIBLE  //Mostramos el textView con la característica
+
+                    crearFicheroTexto(nuevaFecha.dia.toString(), nuevaFecha.mes.toString(), nuevaFecha.anyo.toString(),binding.nombrePT.text.toString(), edad.toString(), genero)
+
                 }
                 else //Si la fecha es incorrecta, avisamos al usuario
                     mostrarToast("La fecha introducida no es correcta")
@@ -63,6 +68,52 @@ class MainActivity : AppCompatActivity()
         }
     }
 
+    fun crearFicheroTexto(dia: String, mes: String, anyo: String, nombre: String, edad:String, genero:String){
+        var textoFichero: String
+        textoFichero = dia + "/" + mes + "/" + anyo + ";" + nombre + ";" + edad + ";" + genero
+        escribirEnFichero(textoFichero)
+    }
+
+    private fun escribirEnFichero(datos: String) {
+        try {
+            val writer: PrintWriter = PrintWriter(openFileOutput(getString(R.string.filename), MODE_APPEND))
+            writer.println(datos)
+            writer.flush()
+            writer.close()
+            Toast.makeText(this, "Correcto", Toast.LENGTH_SHORT).show()
+        } catch (e: IOException) {
+            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun leerFichero() {
+        var text = ""
+        // Se comprueba si existe el fichero.
+        if (fileList().contains(getString(R.string.filename))) {
+            try {
+                val entrada = InputStreamReader(openFileInput(getString(R.string.filename)))
+                val br = BufferedReader(entrada)
+                // Leemos la primera línea
+                var linea = br.readLine()
+                while (!linea.isNullOrEmpty()) {
+                    // Obtenemos los datos separandolo por el ;
+                    val datos: List<String> = linea.split(";")
+                    val mostrar: String
+                    // Montamos el texto a mostrar
+// y lo añadimos al textView
+                    mostrar = "Articulo: " + datos[0] +
+                            " Código: " + datos[1] +
+                            " Precio: " + datos[2]
+                }
+                br.close()
+                entrada.close()
+            } catch (e: IOException) {
+                Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+            }
+        } else {
+            Toast.makeText(this, "No existe el fichero", Toast.LENGTH_LONG).show()
+        }
+    }
 
     fun esconderTeclado() //Función para esconder el teclado al pulsar el botón
     {
@@ -81,9 +132,9 @@ class MainActivity : AppCompatActivity()
     {
         if(edad < 13)
         {
-            if(genero == "M")
+            if(genero == "Masculino")
                 return "Niño"
-            else if(genero == "F")
+            else if(genero == "Femenino")
                 return "Niña"
         }
         else if(edad in 13..17)
@@ -92,16 +143,16 @@ class MainActivity : AppCompatActivity()
         }
         else if(edad in 18..64)
         {
-            if(genero == "M")
+            if(genero == "Masculino")
                 return "Hombre"
-            else if(genero == "F")
+            else if(genero == "Femenino")
                 return "Mujer"
         }
         else if(edad >= 65)
         {
-            if(genero == "M")
+            if(genero == "Masculino")
                 return "Jubilado"
-            else if(genero == "F")
+            else if(genero == "Femenino")
                 return "Jubilada"
         }
         return ""
