@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    tools:background="#00BCD4">
 
     <TextView
         android:id="@+id/mesTextView"
@@ -31,7 +32,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Año"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/diaTextView" />
 
@@ -39,9 +42,7 @@
         android:id="@+id/nombreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
         android:text="Nombre"
         app:layout_constraintBottom_toTopOf="@+id/generoTextView"
         app:layout_constraintEnd_toStartOf="@+id/edadNumTextView"
@@ -83,4 +84,5 @@
         android:text="Edad Num"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edadTextView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

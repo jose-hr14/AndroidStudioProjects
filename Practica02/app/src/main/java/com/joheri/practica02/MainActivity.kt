@@ -1,6 +1,7 @@
 package com.joheri.practica02
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -20,6 +21,13 @@ class MainActivity : AppCompatActivity()
 
         binding = enlazarBinding() //Función para enlazar la vista con el código
         setContentView(binding.root)
+
+        binding.historicoBoton.setOnClickListener()
+        {
+            val intent = Intent(this, SecondActivity::class.java)
+
+            startActivity(intent)
+        }
 
         binding.calcularBoton.setOnClickListener() //Configuramos el evento que se desarrolla al pulsar el botón
         {
@@ -70,7 +78,7 @@ class MainActivity : AppCompatActivity()
 
     fun crearFicheroTexto(dia: String, mes: String, anyo: String, nombre: String, edad:String, genero:String){
         var textoFichero: String
-        textoFichero = dia + "/" + mes + "/" + anyo + ";" + nombre + ";" + edad + ";" + genero
+        textoFichero = dia + ";" + mes + ";" + anyo + ";" + nombre + ";" + edad + ";" + genero
         escribirEnFichero(textoFichero)
     }
 
