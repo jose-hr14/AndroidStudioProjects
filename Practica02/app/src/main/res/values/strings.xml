@@ -23,4 +23,12 @@
     <string name="mujer">Mujer</string>
     <string name="jubilado">Jubilado</string>
     <string name="jubilada">Jubilada</string>
+    <string name="mes">Mes</string>
+    <string name="dia">Día</string>
+    <string name="a_o">Año</string>
+    <string name="nombre">Nombre</string>
+    <string name="g_nero">Género</string>
+    <string name="edad">Edad</string>
+    <string name="edad_num">Edad Num</string>
+    <string name="historial">Historial</string>
 </resources>
