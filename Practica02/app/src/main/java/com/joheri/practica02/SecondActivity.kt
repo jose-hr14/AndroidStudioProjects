@@ -1,19 +1,20 @@
 package com.joheri.practica02
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.joheri.practica02.databinding.ActivitySecondBinding
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 
+//José Hernández Riquelme
 class SecondActivity : AppCompatActivity() {
     lateinit var binding: ActivitySecondBinding
     private val adapter: RecycleAdapter = RecycleAdapter()
 
+    //Inicializamos el binding y llamamos a la función que pone a punto el recyclerview
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -22,11 +23,12 @@ class SecondActivity : AppCompatActivity() {
 
         configurarRecyclerView()
 
-
     }
+
+    // Con esta función, ponemos a punto el recyclerview para mostrarlo en nuestra actividad
     fun configurarRecyclerView()
     {
-        var listaPersonas = leerFichero()
+        val listaPersonas = leerFichero()
 
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
@@ -34,24 +36,22 @@ class SecondActivity : AppCompatActivity() {
         binding.recyclerView.adapter = adapter
     }
 
+    // Leemos el fichero del historial de personas y convertimos los datos extraídos en objetos
+    // de la clase Persona para, posteriormente, añadirlo a un array y devolverlo
     fun leerFichero(): MutableList<Persona> {
-        var ext = ""
-        var listaPersonas: MutableList<Persona> = ArrayList<Persona>()
-        // Se comprueba si existe el fichero.
+        val listaPersonas: MutableList<Persona> = ArrayList<Persona>()
+
         if (fileList().contains(getString(R.string.filename))) {
 
             try {
                 val entrada = InputStreamReader(openFileInput(getString(R.string.filename)))
                 val br = BufferedReader(entrada)
-                // Leemos la primera línea
                 var linea = br.readLine()
                 while (!linea.isNullOrEmpty())
                 {
-                    // Obtenemos los datos separandolo por el ;
                     val datos: List<String> = linea.split(";")
-                    var nuevaPersona: Persona = Persona()
-                    // Montamos el texto a mostrar
-                    // y lo añadimos al textView
+                    val nuevaPersona: Persona = Persona()
+
                     nuevaPersona.dia = datos[0]
                     nuevaPersona.mes = datos[1]
                     nuevaPersona.anyo = datos[2]
