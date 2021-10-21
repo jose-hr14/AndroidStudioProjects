@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.joheri.practica02.databinding.HistorialPersonasBinding
 
-
+//José Hernández Riquelme
 class RecycleAdapter: RecyclerView.Adapter<RecycleAdapter.ViewHolder>() {
     private var listaPersonas: MutableList<Persona> = ArrayList()
     private lateinit var context: Context
