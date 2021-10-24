@@ -78,7 +78,9 @@ class MainActivity : AppCompatActivity()
                     //Mostramos el textView con la característica
                     binding.caracterSticaTV.visibility = View.VISIBLE
 
-                    prepararTextoFichero(nuevaFecha.dia.toString(), nuevaFecha.mes.toString(), nuevaFecha.anyo.toString(),binding.nombrePT.text.toString(), edad.toString(), genero)
+                    escribirTextoFormateado(nuevaFecha.dia.toString(), mesNumeroACadeena
+                        (nuevaFecha.mes.toString()), nuevaFecha.anyo.toString(),
+                        binding.nombrePT.text.toString(), edad.toString(), genero)
 
                 }
                 //Si la fecha es incorrecta, avisamos al usuario
@@ -93,9 +95,28 @@ class MainActivity : AppCompatActivity()
         }
     }
 
+    fun mesNumeroACadeena(mes: String): String
+    {
+        when(mes)
+        {
+            "1" -> return "Enero"
+            "2" -> return "Febrero"
+            "3" -> return "Marzo"
+            "4" -> return "Abril"
+            "5" -> return "Mayo"
+            "6" -> return "Junio"
+            "7" -> return "Julio"
+            "8" -> return "Agosto"
+            "9" -> return "Septiembre"
+            "10" -> return "Octubre"
+            "11" -> return "Noviembre"
+            "12" -> return "Diciembre"
+            else -> return ""
+        }
+    }
     // Con esta función, separamos los datos de la persona por punto y coma, para posteriormente, extraer
     // toda la cadena dividiéndola en puntos y comas y meterla en una lista
-    fun prepararTextoFichero(dia: String, mes: String, anyo: String, nombre: String, edad:String, genero:String){
+    fun escribirTextoFormateado(dia: String, mes: String, anyo: String, nombre: String, edad:String, genero:String){
         val textoFichero: String = dia + ";" + mes + ";" + anyo + ";" + nombre + ";" + edad + ";" + genero
         escribirEnFichero(textoFichero)
     }

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Practica01</string>
+    <string name="app_name">Practica02</string>
     <string name="introduzca_el_nombre">Introduzca el nombre</string>
     <string name="nombre">Nombre</string>
     <string name="fecha_de_nacimiento">Fecha de nacimiento</string>
@@ -23,10 +23,7 @@
     <string name="mujer">Mujer</string>
     <string name="jubilado">Jubilado</string>
     <string name="jubilada">Jubilada</string>
-    <string name="mes">Mes</string>
-    <string name="dia">Día</string>
     <string name="a_o">Año</string>
-    <string name="nombre">Nombre</string>
     <string name="g_nero">Género</string>
     <string name="edad">Edad</string>
     <string name="edad_num">Edad Num</string>
