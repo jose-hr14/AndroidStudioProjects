@@ -9,7 +9,7 @@ import com.joheri.practica02.databinding.HistorialPersonasBinding
 
 //José Hernández Riquelme
 class RecycleAdapter: RecyclerView.Adapter<RecycleAdapter.ViewHolder>() {
-    private var listaPersonas: MutableList<Persona> = ArrayList()
+    private lateinit var listaPersonas: MutableList<Persona>
     private lateinit var context: Context
 
     //Metemos la lista de personas y el contexto en el RecyclerAdapter

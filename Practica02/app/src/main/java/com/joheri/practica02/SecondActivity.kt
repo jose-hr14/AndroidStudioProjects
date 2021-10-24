@@ -44,8 +44,7 @@ class SecondActivity : AppCompatActivity() {
         if (fileList().contains(getString(R.string.filename))) {
 
             try {
-                val entrada = InputStreamReader(openFileInput(getString(R.string.filename)))
-                val br = BufferedReader(entrada)
+                val br = BufferedReader(InputStreamReader(openFileInput(getString(R.string.filename))))
                 var linea = br.readLine()
                 while (!linea.isNullOrEmpty())
                 {
@@ -63,7 +62,6 @@ class SecondActivity : AppCompatActivity() {
                     linea = br.readLine()
                 }
                 br.close()
-                entrada.close()
             } catch (e: IOException) {
                 Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
             }
