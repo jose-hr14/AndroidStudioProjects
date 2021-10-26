@@ -7,6 +7,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.tabs.TabLayoutMediator
 import com.joheri.practica03.databinding.ActivityMainBinding
 import java.io.*
 
@@ -16,11 +17,43 @@ class MainActivity : AppCompatActivity()
     private lateinit var binding: ActivityMainBinding
     var isFragment01 = true
 
-    override fun onCreate(savedInstanceState: Bundle?)
-    {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //Función para enlazar la vista con el código
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val viewPager2 = binding.ViewPager2
+
+        val adapter = ViewPager2Adapter(supportFragmentManager, lifecycle)
+
+        adapter.addFragment(Fragment01(), "Cálculo")
+        adapter.addFragment(Fragment02(), "Histórico")
+
+        viewPager2.adapter = adapter
+
+        TabLayoutMediator(binding.tabLayout, viewPager2){tab, position ->
+            tab.text = adapter.getPageTitle(position)
+        }.attach()
+    }
+    // Escribimos los datos separados por punto y coma en el fichero y lo guardamos
+    // para posteriormente mostrarlo en el historial y dejarlos guardados. De esta
+    // manera, aunque cerremos la aplicación, los datos del historial no se perderán.
+    public fun escribirEnFichero(datos: String) {
+        try {
+            val writer = PrintWriter(openFileOutput(getString(R.string.filename), MODE_APPEND))
+            writer.println(datos)
+            writer.flush()
+            writer.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+}
+
+/*
+
+//Función para enlazar la vista con el código
         binding = enlazarBinding()
         setContentView(binding.root)
 
@@ -215,5 +248,4 @@ class MainActivity : AppCompatActivity()
         transaction.commit()
         isFragment01 = false
     }
-
-}
+ */
