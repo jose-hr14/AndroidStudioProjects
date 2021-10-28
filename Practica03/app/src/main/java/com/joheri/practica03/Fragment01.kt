@@ -27,7 +27,26 @@ class Fragment01 : Fragment() {
         Log.d(TAG, "onCreate")
         super.onCreate(savedInstanceState)
 
+
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Log.d(TAG, "onCreateView")
+        return inflater!!.inflate(R.layout.fragment01, container, false)
+
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d(TAG, "onViewCreated")
+        super.onViewCreated(view, savedInstanceState)
+
         binding = Fragment01Binding.inflate(layoutInflater)
+
 
         binding.calcularBoton.setOnClickListener(){
             if(binding.nombrePT.text.isNotEmpty() && binding.diaPT.text.isNotEmpty()
@@ -85,30 +104,20 @@ class Fragment01 : Fragment() {
             else
                 mostrarToast(getString(R.string.faltanDatos))
         }
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        Log.d(TAG, "onCreateView")
-        return inflater!!.inflate(R.layout.fragment01, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.d(TAG, "onViewCreated")
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun onStart() {
         Log.d(TAG, "onStart")
         super.onStart()
+
     }
 
     override fun onResume() {
         Log.d(TAG, "onResume")
         super.onResume()
+
+
     }
 
     override fun onPause() {
