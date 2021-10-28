@@ -1,54 +1,48 @@
 package com.joheri.practica03
 
-import android.content.Context
 import android.content.Context.MODE_APPEND
-import android.content.ContextWrapper
 import android.os.Bundle
-import android.util.Log
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat.getSystemService
 import com.joheri.practica03.databinding.Fragment01Binding
 import java.io.IOException
 import java.io.PrintWriter
 
-class Fragment01 : Fragment() {
-    val TAG = "Fragment01"
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
+
+/**
+ * A simple [Fragment] subclass.
+ * Use the [BlankFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
+class BlankFragment : Fragment() {
+    // TODO: Rename and change types of parameters
+    private var param1: String? = null
+    private var param2: String? = null
     private lateinit var binding: Fragment01Binding
 
-    override fun onAttach(context: Context) {
-        Log.d(TAG, "onAttach")
-        super.onAttach(context)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d(TAG, "onCreate")
         super.onCreate(savedInstanceState)
-
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        Log.d(TAG, "onCreateView")
-        return inflater!!.inflate(R.layout.fragment01, container, false)
-
-
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.d(TAG, "onViewCreated")
-        super.onViewCreated(view, savedInstanceState)
-
+        arguments?.let {
+            param1 = it.getString(ARG_PARAM1)
+            param2 = it.getString(ARG_PARAM2)
+        }
+        //Función para enlazar la vista con el código
         binding = Fragment01Binding.inflate(layoutInflater)
+        activity?.setContentView(binding.root)
 
-
-        binding.calcularBoton.setOnClickListener(){
+        //Configuramos el evento que se desarrolla al pulsar el botón
+        binding.calcularBoton.setOnClickListener()
+        {
+            //Llevamos a cabo la ejecución de las instrucciones solo cuando los campos estén llenos
             if(binding.nombrePT.text.isNotEmpty() && binding.diaPT.text.isNotEmpty()
                 && binding.mesPT.text.isNotEmpty() && binding.anyoPT.text.isNotEmpty()
                 && binding.radioGroup.checkedRadioButtonId != -1)
@@ -99,46 +93,16 @@ class Fragment01 : Fragment() {
                 //Si la fecha es incorrecta, avisamos al usuario
                 else
                     mostrarToast(getString(R.string.fechaIncorrecta))
+
             }
             //Si alguno de los campos está vacío, avisamos al usuario
             else
                 mostrarToast(getString(R.string.faltanDatos))
+
         }
 
     }
 
-    override fun onStart() {
-        Log.d(TAG, "onStart")
-        super.onStart()
-
-    }
-
-    override fun onResume() {
-        Log.d(TAG, "onResume")
-        super.onResume()
-
-
-    }
-
-    override fun onPause() {
-        Log.d(TAG, "onPause")
-        super.onPause()
-    }
-
-    override fun onDestroyView() {
-        Log.d(TAG, "onDestroyView")
-        super.onDestroyView()
-    }
-
-    override fun onDestroy() {
-        Log.d(TAG, "onDestroy")
-        super.onDestroy()
-    }
-
-    override fun onDetach() {
-        Log.d(TAG, "onDetach")
-        super.onDetach()
-    }
     fun mesNumeroACadeena(mes: String): String
     {
         when(mes)
@@ -174,22 +138,20 @@ class Fragment01 : Fragment() {
             writer.println(datos)
             writer.flush()
             writer.close()
+            Toast.makeText(activity, "Correcto", Toast.LENGTH_SHORT).show()
         } catch (e: IOException) {
-            e.printStackTrace()
+            Toast.makeText(activity, e.message, Toast.LENGTH_LONG).show()
         }
     }
 
 
     //Función para enlazar la vista con el código
-    fun enlazarBinding(): Fragment01Binding
-    {
-        return Fragment01Binding.inflate(layoutInflater)
-    }
+
 
     //Función para mostrar el toast
     fun mostrarToast(texto: String)
     {
-        Toast.makeText(context,texto, Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity,texto, Toast.LENGTH_SHORT).show()
     }
 
     //Función para devolver la característica de la persona
@@ -222,4 +184,13 @@ class Fragment01 : Fragment() {
         }
         return ""
     }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment01, container, false)
+    }
+
 }
