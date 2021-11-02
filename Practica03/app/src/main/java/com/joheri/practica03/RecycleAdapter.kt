@@ -10,13 +10,11 @@ import com.joheri.practica03.databinding.HistorialPersonasBinding
 //José Hernández Riquelme
 class RecycleAdapter: RecyclerView.Adapter<RecycleAdapter.ViewHolder>() {
     private lateinit var listaPersonas: MutableList<Persona>
-    private lateinit var context: Context
 
     //Metemos la lista de personas y el contexto en el RecyclerAdapter
-    fun RecycleAdapter(listaPersonas: MutableList<Persona>, context: Context)
+    fun RecycleAdapter(listaPersonas: MutableList<Persona>)
     {
         this.listaPersonas = listaPersonas
-        this.context = context
     }
 
     // En la class view holder, creamos la función bind, que une cada
