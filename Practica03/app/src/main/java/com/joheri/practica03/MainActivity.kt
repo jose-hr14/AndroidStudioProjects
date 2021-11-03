@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
         //Preparamos el viewPager2 y el adapter del viewPager2
         val viewPager2 = binding.ViewPager2
         val adapter = ViewPager2Adapter(supportFragmentManager, lifecycle)
