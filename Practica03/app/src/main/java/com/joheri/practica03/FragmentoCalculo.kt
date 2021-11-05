@@ -1,11 +1,14 @@
 package com.joheri.practica03
 
+import android.content.Context
 import android.content.Context.MODE_APPEND
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.joheri.practica03.databinding.FragmentoCalculoBinding
 import java.io.IOException
@@ -17,12 +20,13 @@ class FragmentoCalculo : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentoCalculoBinding.inflate(inflater, container, false)
 
         //Configuramos el evento que se desarrolla al pulsar el botón
         binding.calcularBoton.setOnClickListener()
         {
+            esconderTeclado()
             //Llevamos a cabo la ejecución de las instrucciones solo cuando los campos estén llenos
             if (binding.nombrePT.text.isNotEmpty() && binding.diaPT.text.isNotEmpty()
                 && binding.mesPT.text.isNotEmpty() && binding.anyoPT.text.isNotEmpty()
@@ -81,7 +85,6 @@ class FragmentoCalculo : Fragment() {
         }
         return binding.root
     }
-
     //Convierte el número del mes al nombre del mes
     fun mesNumeroACadeena(mes: String): String {
         when (mes) {
@@ -100,7 +103,6 @@ class FragmentoCalculo : Fragment() {
             else -> return ""
         }
     }
-
     // Con esta función, separamos los datos de la persona por punto y coma, para posteriormente, extraer
     // toda la cadena dividiéndola en puntos y comas y meterla en una lista
     fun escribirTextoFormateado(
@@ -113,16 +115,16 @@ class FragmentoCalculo : Fragment() {
     ) {
         val textoFichero: String =
             dia + ";" + mes + ";" + anyo + ";" + nombre + ";" + edad + ";" + genero
-        escribirEnFichero(textoFichero)
+        myAlertDialog(textoFichero)
+        //escribirEnFichero(textoFichero)
     }
-
     // Escribimos los datos separados por punto y coma en el fichero y lo guardamos
     // para posteriormente mostrarlo en el historial y dejarlos guardados. De esta
     // manera, aunque cerremos la aplicación, los datos del historial no se perderán.
     fun escribirEnFichero(datos: String) {
         try {
             val writer =
-                PrintWriter(activity?.openFileOutput(getString(R.string.filename), MODE_APPEND))
+                PrintWriter(context?.openFileOutput(getString(R.string.filename), MODE_APPEND))
             writer.println(datos)
             writer.flush()
             writer.close()
@@ -131,12 +133,10 @@ class FragmentoCalculo : Fragment() {
             Toast.makeText(activity, e.message, Toast.LENGTH_LONG).show()
         }
     }
-
     //Función para mostrar el toast
     fun mostrarToast(texto: String) {
         Toast.makeText(activity, texto, Toast.LENGTH_SHORT).show()
     }
-
     //Función para devolver la característica de la persona
     fun devolverCaracteristica(edad: Int, genero: String): String {
         if (edad < 13) {
@@ -158,5 +158,27 @@ class FragmentoCalculo : Fragment() {
                 return getString(R.string.jubilada)
         }
         return ""
+    }
+    private fun myAlertDialog(datos: String) {
+        val builder = AlertDialog.Builder(requireActivity())
+        // Se crea el AlertDialog.
+        builder.apply {
+            // Se asigna un título.
+            setTitle("Confirmación de guardado")
+            // Se asgina el cuerpo del mensaje.
+            setMessage("¿Quieres guardar esta persona en el historial?")
+            // Se define el comportamiento de los botones.
+            setPositiveButton(getString(R.string.aceptar)){ _, _ ->
+                escribirEnFichero(datos)
+            }
+            setNegativeButton(getString(R.string.cancelar)) { _, _ ->
+            }
+        }
+        // Se muestra el AlertDialog.
+        builder.show()
+    }
+    fun esconderTeclado(){
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(requireView().getWindowToken(), 0)
     }
 }

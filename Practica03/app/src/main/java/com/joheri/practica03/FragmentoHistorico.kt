@@ -82,4 +82,5 @@ class FragmentoHistorico : Fragment() {
         }
         return listaPersonas
     }
+
 }
