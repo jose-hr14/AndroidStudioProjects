@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.joheri.practica03.databinding.FragmentoCalculoBinding
 import java.io.IOException
 import java.io.PrintWriter
@@ -72,16 +73,17 @@ class FragmentoCalculo : Fragment() {
                             (nuevaFecha.mes.toString()), nuevaFecha.anyo.toString(),
                         binding.nombrePT.text.toString(), edad.toString(), genero
                     )
+                    mostrarSnackBar("Fecha correcta")
 
                 }
                 //Si la fecha es incorrecta, avisamos al usuario
                 else
-                    mostrarToast(getString(R.string.fechaIncorrecta))
+                    mostrarSnackBar(getString(R.string.fechaIncorrecta))
 
             }
             //Si alguno de los campos está vacío, avisamos al usuario
             else
-                mostrarToast(getString(R.string.faltanDatos))
+                mostrarSnackBar(getString(R.string.faltanDatos))
         }
         return binding.root
     }
@@ -128,14 +130,10 @@ class FragmentoCalculo : Fragment() {
             writer.println(datos)
             writer.flush()
             writer.close()
-            Toast.makeText(activity, "Correcto", Toast.LENGTH_SHORT).show()
+            mostrarSnackBar(getString(R.string.usuarioGuardado))
         } catch (e: IOException) {
             Toast.makeText(activity, e.message, Toast.LENGTH_LONG).show()
         }
-    }
-    //Función para mostrar el toast
-    fun mostrarToast(texto: String) {
-        Toast.makeText(activity, texto, Toast.LENGTH_SHORT).show()
     }
     //Función para devolver la característica de la persona
     fun devolverCaracteristica(edad: Int, genero: String): String {
@@ -180,5 +178,8 @@ class FragmentoCalculo : Fragment() {
     fun esconderTeclado(){
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(requireView().getWindowToken(), 0)
+    }
+    private fun mostrarSnackBar(mensaje: String) {
+        Snackbar.make(binding.fragmentHolder01 , mensaje, Snackbar.LENGTH_LONG).show()
     }
 }
