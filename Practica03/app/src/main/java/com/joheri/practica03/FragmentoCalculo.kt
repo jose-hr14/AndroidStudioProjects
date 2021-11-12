@@ -73,8 +73,6 @@ class FragmentoCalculo : Fragment() {
                             (nuevaFecha.mes.toString()), nuevaFecha.anyo.toString(),
                         binding.nombrePT.text.toString(), edad.toString(), genero
                     )
-                    mostrarSnackBar("Fecha correcta")
-
                 }
                 //Si la fecha es incorrecta, avisamos al usuario
                 else
@@ -87,24 +85,26 @@ class FragmentoCalculo : Fragment() {
         }
         return binding.root
     }
+
     //Convierte el número del mes al nombre del mes
     fun mesNumeroACadeena(mes: String): String {
         when (mes) {
-            "1" -> return "Enero"
-            "2" -> return "Febrero"
-            "3" -> return "Marzo"
-            "4" -> return "Abril"
-            "5" -> return "Mayo"
-            "6" -> return "Junio"
-            "7" -> return "Julio"
-            "8" -> return "Agosto"
-            "9" -> return "Septiembre"
-            "10" -> return "Octubre"
-            "11" -> return "Noviembre"
-            "12" -> return "Diciembre"
+            "1" -> return getString(R.string.enero)
+            "2" -> return getString(R.string.febrero)
+            "3" -> return getString(R.string.marzo)
+            "4" -> return getString(R.string.abril)
+            "5" -> return getString(R.string.mayo)
+            "6" -> return getString(R.string.junio)
+            "7" -> return getString(R.string.julio)
+            "8" -> return getString(R.string.agosto)
+            "9" -> return getString(R.string.septiembre)
+            "10" -> return getString(R.string.octubre)
+            "11" -> return getString(R.string.noviembre)
+            "12" -> return getString(R.string.diciembre)
             else -> return ""
         }
     }
+
     // Con esta función, separamos los datos de la persona por punto y coma, para posteriormente, extraer
     // toda la cadena dividiéndola en puntos y comas y meterla en una lista
     fun escribirTextoFormateado(
@@ -120,6 +120,7 @@ class FragmentoCalculo : Fragment() {
         myAlertDialog(textoFichero)
         //escribirEnFichero(textoFichero)
     }
+
     // Escribimos los datos separados por punto y coma en el fichero y lo guardamos
     // para posteriormente mostrarlo en el historial y dejarlos guardados. De esta
     // manera, aunque cerremos la aplicación, los datos del historial no se perderán.
@@ -135,6 +136,7 @@ class FragmentoCalculo : Fragment() {
             Toast.makeText(activity, e.message, Toast.LENGTH_LONG).show()
         }
     }
+
     //Función para devolver la característica de la persona
     fun devolverCaracteristica(edad: Int, genero: String): String {
         if (edad < 13) {
@@ -157,6 +159,7 @@ class FragmentoCalculo : Fragment() {
         }
         return ""
     }
+
     private fun myAlertDialog(datos: String) {
         val builder = AlertDialog.Builder(requireActivity())
         // Se crea el AlertDialog.
@@ -166,7 +169,7 @@ class FragmentoCalculo : Fragment() {
             // Se asgina el cuerpo del mensaje.
             setMessage("¿Quieres guardar esta persona en el historial?")
             // Se define el comportamiento de los botones.
-            setPositiveButton(getString(R.string.aceptar)){ _, _ ->
+            setPositiveButton(getString(R.string.aceptar)) { _, _ ->
                 escribirEnFichero(datos)
             }
             setNegativeButton(getString(R.string.cancelar)) { _, _ ->
@@ -175,11 +178,15 @@ class FragmentoCalculo : Fragment() {
         // Se muestra el AlertDialog.
         builder.show()
     }
-    fun esconderTeclado(){
+
+    //Funcion que esconde el teclado
+    fun esconderTeclado() {
         val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(requireView().getWindowToken(), 0)
     }
+
+    //Función que muestra con un snackbar el mensaje que se le pase como parámetro
     private fun mostrarSnackBar(mensaje: String) {
-        Snackbar.make(binding.fragmentHolder01 , mensaje, Snackbar.LENGTH_LONG).show()
+        Snackbar.make(binding.fragmentHolder01, mensaje, Snackbar.LENGTH_LONG).show()
     }
 }

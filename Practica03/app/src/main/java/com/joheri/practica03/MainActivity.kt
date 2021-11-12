@@ -12,8 +12,7 @@ import com.joheri.practica03.databinding.ActivityMainBinding
 import java.io.*
 
 //José Hernández Riquelme
-class MainActivity : AppCompatActivity()
-{
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +34,7 @@ class MainActivity : AppCompatActivity()
         viewPager2.adapter = adapter
 
         //Cargamos las pestañas del labLayout en nuestra main activity
-        TabLayoutMediator(binding.tabLayout, viewPager2){tab, position ->
+        TabLayoutMediator(binding.tabLayout, viewPager2) { tab, position ->
             tab.text = adapter.getPageTitle(position)
         }.attach()
     }

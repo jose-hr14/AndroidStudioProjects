@@ -1,4 +1,5 @@
 package com.joheri.practica03
+
 //José Hernández Riquelme
 class Persona {
     var nombre: String? = null

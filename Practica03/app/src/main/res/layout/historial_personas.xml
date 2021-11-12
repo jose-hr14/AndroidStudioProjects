@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginEnd="5dp"
     app:cardBackgroundColor="#00BCD4"
     app:cardCornerRadius="50dp"
     app:cardElevation="20dp"
@@ -19,7 +22,7 @@
             android:id="@+id/mesTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/mes"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@+id/diaTextView"
@@ -30,7 +33,7 @@
             android:id="@+id/diaTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/dia"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@+id/anyoTextView"
@@ -42,8 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/a_o"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -58,7 +61,6 @@
             android:layout_marginTop="16dp"
             android:text="@string/nombre"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/generoTextView"
             app:layout_constraintEnd_toEndOf="@+id/generoTextView"
             app:layout_constraintStart_toStartOf="@+id/generoTextView"
             app:layout_constraintTop_toTopOf="parent" />
@@ -67,20 +69,20 @@
             android:id="@+id/generoTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
+            android:layout_marginTop="16dp"
             android:text="@string/genero"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nombreTextView" />
 
         <TextView
             android:id="@+id/edadTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="@string/edad"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/edadNumTextView"
             app:layout_constraintEnd_toEndOf="@+id/edadNumTextView"
             app:layout_constraintStart_toStartOf="@+id/edadNumTextView"
             app:layout_constraintTop_toTopOf="parent" />
@@ -89,12 +91,12 @@
             android:id="@+id/edadNumTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="16dp"
             android:text="@string/edad_num"
             android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edadTextView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

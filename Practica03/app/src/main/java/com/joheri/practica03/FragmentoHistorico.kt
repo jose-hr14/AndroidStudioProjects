@@ -30,6 +30,7 @@ class FragmentoHistorico : Fragment() {
         return binding.root
 
     }
+
     //Volvemos a llamar a la función cuando se retome el fragmento, para que las persona añadidas
     //en tiempo de ejecución aparezcan en recycler view. Recargamos el recycler view con las
     //últimar personas añadidas

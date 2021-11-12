@@ -8,12 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.joheri.practica03.databinding.HistorialPersonasBinding
 
 //José Hernández Riquelme
-class RecycleAdapter: RecyclerView.Adapter<RecycleAdapter.ViewHolder>() {
+class RecycleAdapter : RecyclerView.Adapter<RecycleAdapter.ViewHolder>() {
     private lateinit var listaPersonas: MutableList<Persona>
 
     //Metemos la lista de personas y el contexto en el RecyclerAdapter
-    fun RecycleAdapter(listaPersonas: MutableList<Persona>)
-    {
+    fun RecycleAdapter(listaPersonas: MutableList<Persona>) {
         this.listaPersonas = listaPersonas
     }
 
