@@ -14,7 +14,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         juegosDBHelper = MyDBOpenHelper(this, null)
-        var compania = Compania(1, "Nintendo")
-        juegosDBHelper.addCompania(compania)
+//        var compania = Compania(1, "Nintendo")
+//        juegosDBHelper.addCompania(compania)
+
     }
 }
