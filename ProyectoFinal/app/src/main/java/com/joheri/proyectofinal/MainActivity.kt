@@ -14,6 +14,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         juegosDBHelper = MyDBOpenHelper(this, null)
+        var juego: Juego = Juego(1, "Pokémon Rojo", "RPG", 1998, "Nintendo", "Game Boy")
+        juegosDBHelper.addJuego(juego)
+        binding.button.setOnClickListener()
+        {
+            juegosDBHelper.readableDatabase
+        }
 //        var compania = Compania(1, "Nintendo")
 //        juegosDBHelper.addCompania(compania)
 
