@@ -29,14 +29,21 @@ class MyDBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
      */
     override fun onCreate(db: SQLiteDatabase?) {
         try {
-            val crearTablaJuegos = "CREATE TABLE $TABLA_JUEGOS " +
-                    "($JUEGOS_CODIGO INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    "$JUEGOS_NOMBRE TEXT," +
-                    "$JUEGOS_GENERO TEXT," +
-                    "$JUEGOS_ANYO INTEGER," +
-                    "$JUEGOS_COMPANIA INTEGER," +
-                    "$JUEGOS_CONSOLA TEXT"
+            val crearTablaJuegos = "CREATE TABLE juegos (codigo INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, genero TEXT, año INTEGER, compañia INTEGER, consola TEXT)"
             db!!.execSQL(crearTablaJuegos)
+
+/*            var juego = Juego(1, "Pokémon Rojo", "RPG", 1998, "Nintendo", "Game Boy")
+            this.addJuego(juego)
+            juego = Juego(1, "Pokémon Azul", "RPG", 1998, "Nintendo", "Game Boy")
+            this.addJuego(juego)
+            juego = Juego(1, "Pokémon Amarillo", "RPG", 1998, "Nintendo", "Game Boy")
+            this.addJuego(juego)
+            juego = Juego(1, "Pokémon Oro", "RPG", 1998, "Nintendo", "Game Boy")
+            this.addJuego(juego)
+            juego = Juego(1, "Pokémon Plata", "RPG", 1998, "Nintendo", "Game Boy")
+            this.addJuego(juego)
+            juego = Juego(1, "Pokémon Cristal", "RPG", 1998, "Nintendo", "Game Boy")
+            this.addJuego(juego)*/
         } catch (e: SQLiteException) {
             e.printStackTrace()
         }
@@ -69,30 +76,30 @@ class MyDBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     fun addJuego(juego: Juego) {
         // Se crea un ArrayMap<>() haciendo uso de ContentValues().
         val data = ContentValues()
-        data.put(JUEGOS_CODIGO, juego.codigo)
-        data.put(JUEGOS_NOMBRE, juego.nombre)
-        data.put(JUEGOS_GENERO, juego.genero)
-        data.put(JUEGOS_ANYO, juego.anyo)
-        data.put(JUEGOS_COMPANIA, juego.compania)
-        data.put(JUEGOS_CONSOLA, juego.consola)
-
+        //data.put(JUEGOS_CODIGO, juego.codigo)
+        data.put("nombre", juego.nombre)
+        data.put("genero", juego.genero)
+        data.put("año", juego.anyo)
+        data.put("compañia", juego.compania)
+        data.put("consola", juego.consola)
+        //this.writableDatabase.execSQL("INSERT INTO juegos (nombre, genero, año, compañia, consola) VALUES('nombre', 'genero', 'año', 'compañia', 'cosola'"));
         // Se abre la BD en modo escritura.
         val db = this.writableDatabase
         db.insert(TABLA_JUEGOS, null, data)
         db.close()
     }
 
-    fun delJuego(identifier: Int): Int {
+    fun delJuego(identifier: Int) {
         val args = arrayOf(identifier.toString())
 
         // Se abre la BD en modo escritura.
         val db = this.writableDatabase
 
         // Se puede elegir un sistema u otro.
-        val result = db.delete(TABLA_JUEGOS, "$JUEGOS_CODIGO = $identifier", args)
-        // db.execSQL("DELETE FROM $TABLA_AMIGOS WHERE $COLUMNA_ID = ?", args)
+        //val result = db.delete(TABLA_JUEGOS, "$JUEGOS_CODIGO = $identifier", args)
+        db.execSQL("DELETE FROM juegos where codigo = $identifier")
 
         db.close()
-        return result
+
     }
 }

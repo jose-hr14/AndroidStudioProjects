@@ -16,12 +16,21 @@ class MainActivity : AppCompatActivity() {
         juegosDBHelper = MyDBOpenHelper(this, null)
         var juego: Juego = Juego(1, "Pokémon Rojo", "RPG", 1998, "Nintendo", "Game Boy")
         juegosDBHelper.addJuego(juego)
+
+        binding.anadirJuegoButton.setOnClickListener()
+        {
+            var juego = Juego(1, binding.nombreET.text.toString(), binding.generoET.text.toString(), binding.anyoET.text.toString().toInt(), binding.companiaET.text.toString(), binding.consolaET.text.toString())
+            juegosDBHelper.addJuego(juego)
+        }
         binding.button.setOnClickListener()
         {
             juegosDBHelper.readableDatabase
         }
-//        var compania = Compania(1, "Nintendo")
-//        juegosDBHelper.addCompania(compania)
+        binding.button2.setOnClickListener()
+        {
+            juegosDBHelper.delJuego(3);
+        }
+
 
     }
 }
