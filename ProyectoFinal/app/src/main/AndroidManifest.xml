@@ -14,7 +14,8 @@
         android:theme="@style/Theme.ProyectoFinal">
         <activity
             android:name=".DetallesActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".BibliotecaActivity" />
         <activity
             android:name=".BibliotecaActivity"
             android:exported="false"
