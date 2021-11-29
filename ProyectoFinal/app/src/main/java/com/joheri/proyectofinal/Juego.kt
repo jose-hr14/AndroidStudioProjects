@@ -7,6 +7,7 @@ class Juego {
     var anyo: Int? = null
     var compania: String? = null
     var consola: String? = null
+    var caratulaURL: String? = null
 
     constructor(
         codigo: Int?,
@@ -14,7 +15,8 @@ class Juego {
         genero: String?,
         anyo: Int?,
         compania: String?,
-        consola: String?
+        consola: String?,
+        caratulaURL: String?
     ) {
         this.codigo = codigo
         this.nombre = nombre
@@ -22,5 +24,6 @@ class Juego {
         this.anyo = anyo
         this.compania = compania
         this.consola = consola
+        this.caratulaURL = caratulaURL
     }
 }

@@ -26,48 +26,49 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/nombreTV"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/nombreTV"
             app:layout_constraintTop_toBottomOf="@+id/companitaTV"
             tools:text="Consola" />
 
         <ImageView
             android:id="@+id/juegoIMG"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/consolaTV"
+            android:layout_width="210dp"
+            android:layout_height="234dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/nombreTV"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:mipmap/sym_def_app_icon" />
 
         <TextView
             android:id="@+id/tvIdentificador"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             tools:text="id" />
 
         <TextView
             android:id="@+id/nombreTV"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
             android:textAlignment="center"
-            android:textSize="30sp"
+            android:textSize="22sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@+id/tvIdentificador"
+            app:layout_constraintBottom_toTopOf="@+id/generoTV"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/juegoIMG"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="spread"
             tools:text="Nombre" />
 
         <TextView
@@ -75,11 +76,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/anyoTV"
             app:layout_constraintEnd_toEndOf="@+id/nombreTV"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/nombreTV"
-            app:layout_constraintTop_toBottomOf="@id/nombreTV"
+            app:layout_constraintTop_toBottomOf="@+id/nombreTV"
             tools:text="Género" />
 
         <TextView
@@ -87,9 +90,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/companitaTV"
             app:layout_constraintEnd_toEndOf="@+id/nombreTV"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/nombreTV"
             app:layout_constraintTop_toBottomOf="@+id/generoTV"
             tools:text="Año" />
@@ -99,9 +104,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textStyle="italic"
+            app:layout_constraintBottom_toTopOf="@+id/consolaTV"
             app:layout_constraintEnd_toEndOf="@+id/nombreTV"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/nombreTV"
             app:layout_constraintTop_toBottomOf="@+id/anyoTV"
             tools:text="Compañía" />

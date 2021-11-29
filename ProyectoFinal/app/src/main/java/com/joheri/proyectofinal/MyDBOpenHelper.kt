@@ -29,7 +29,7 @@ class MyDBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
      */
     override fun onCreate(db: SQLiteDatabase?) {
         try {
-            val crearTablaJuegos = "CREATE TABLE juegos (codigo INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, genero TEXT, año INTEGER, compañia INTEGER, consola TEXT)"
+            val crearTablaJuegos = "CREATE TABLE juegos (codigo INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, genero TEXT, año INTEGER, compañia INTEGER, consola TEXT, caratula_url TEXT)"
             db!!.execSQL(crearTablaJuegos)
 
 /*            var juego = Juego(1, "Pokémon Rojo", "RPG", 1998, "Nintendo", "Game Boy")
@@ -82,6 +82,7 @@ class MyDBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         data.put("año", juego.anyo)
         data.put("compañia", juego.compania)
         data.put("consola", juego.consola)
+        data.put("caratula_url", juego.caratulaURL)
         //this.writableDatabase.execSQL("INSERT INTO juegos (nombre, genero, año, compañia, consola) VALUES('nombre', 'genero', 'año', 'compañia', 'cosola'"));
         // Se abre la BD en modo escritura.
         val db = this.writableDatabase
