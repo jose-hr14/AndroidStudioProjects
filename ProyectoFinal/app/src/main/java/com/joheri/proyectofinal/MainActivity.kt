@@ -1,5 +1,6 @@
 package com.joheri.proyectofinal
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.joheri.proyectofinal.databinding.ActivityMainBinding
@@ -21,6 +22,11 @@ class MainActivity : AppCompatActivity() {
         {
             var juego = Juego(1, binding.nombreET.text.toString(), binding.generoET.text.toString(), binding.anyoET.text.toString().toInt(), binding.companiaET.text.toString(), binding.consolaET.text.toString())
             juegosDBHelper.addJuego(juego)
+        }
+        binding.bibliotecaButton.setOnClickListener()
+        {
+            val myIntent = Intent(this@MainActivity, BibliotecaActivity::class.java)
+            startActivity(myIntent)
         }
         binding.button.setOnClickListener()
         {

@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoFinal">
         <activity
+            android:name=".BibliotecaActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:label="Biblioteca juegos" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
