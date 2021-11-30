@@ -19,7 +19,16 @@ class BibliotecaActivity : AppCompatActivity() {
 
         setTitle("Biblioteca juegos")
 
+        setUpRecyclerView()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        setUpRecyclerView()
+    }
+
+    fun setUpRecyclerView()
+    {
         // Se instancia la BD en modo lectura y se crea la SELECT.
         db = juegosDB.readableDatabase
         val cursor: Cursor = db.rawQuery(

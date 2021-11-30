@@ -120,7 +120,7 @@ class MyDBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         data.put("caratula_url", juego.caratulaURL)
 
         val db = this.writableDatabase
-        db.update("juegos", data, "codigo = $identifier", args)
+        db.update("juegos", data, "codigo = ?", args)
         db.close()
     }
 }

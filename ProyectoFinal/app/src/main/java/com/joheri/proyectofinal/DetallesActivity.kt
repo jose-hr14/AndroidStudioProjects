@@ -52,9 +52,14 @@ class DetallesActivity : AppCompatActivity() {
         {
             val db = MyDBOpenHelper(this, null)
 
-            val juego = Juego(intent.getStringExtra("codigo")?.toInt(), binding.nombreTV2.text.toString(), binding.generoTV2.text.toString(), binding.anyoTV2.text.toString().toInt(), binding.companiaTV2.text.toString(), binding.consolaTV2.text.toString(), intent.getStringExtra("imagen"))
+            val juego = Juego(intent.getStringExtra("codigo")?.toInt(), binding.nombreET2.text.toString(), binding.generoET2.text.toString(), binding.anyoET2.text.toString().toInt(), binding.companiaET2.text.toString(), binding.consolaET2.text.toString(), intent.getStringExtra("imagen"))
             db.updateJuego(intent.getStringExtra("codigo")!!.toInt(), juego )
 
+        }
+
+        binding.borrarButton.setOnClickListener()
+        {
+            finish()
         }
 
 
