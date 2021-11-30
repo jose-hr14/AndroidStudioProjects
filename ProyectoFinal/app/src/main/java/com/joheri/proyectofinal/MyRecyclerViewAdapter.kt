@@ -4,9 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -20,6 +18,7 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
 
     private lateinit var context: Context
     private lateinit var cursor: Cursor
+    private var actionMode: ActionMode? = null
 
     fun MyRecyclerViewAdapter(context: Context, cursor: Cursor) {
         this.context = context
@@ -107,6 +106,69 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
                 }
                 startActivity(context, intent, null)
             }
+            itemView.setOnLongClickListener {
+                when (actionMode) {
+                    null -> {
+                        // Se lanza el ActionMode.
+                        cursor.moveToPosition(position)
+                        actionMode = it.startActionMode(actionModeCallback)
+                        it.isSelected = true
+                        true
+                    }
+                    else -> false
+                }
+                return@setOnLongClickListener true
+            }
+        }
+    }
+
+    /**
+     * Modo de acción contextual.
+     */
+    private val actionModeCallback = object : ActionMode.Callback {
+        // Método llamado al selección una opción del menú.
+        override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?)
+                : Boolean {
+
+            return when (item!!.itemId) {
+                R.id.optionDelete -> {
+
+                    Toast.makeText(context, "Eliminar el elemento: ${cursor.getString(0)}", Toast.LENGTH_LONG)
+                        .show()
+                    val db = MyDBOpenHelper(context, null)
+                    db.delJuego(cursor.getInt(0))
+                    mode!!.finish()
+                    return true
+                }
+                R.id.optionShare -> {
+                    Toast.makeText(context, "Compartir", Toast.LENGTH_LONG)
+                        .show()
+                    return true
+                }
+                else -> false
+            }
+        }
+
+
+        // Llamado cuando al crear el modo acción a través de startActionMode().
+        override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+            //val inflater = mActivity?.menuInflater
+            // Así no necesito la activity
+            val inflater = mode?.menuInflater
+            inflater?.inflate(R.menu.action_mode_menu, menu)
+            return true
+        }
+
+        // Se llama cada vez que el modo acción se muestra, siempre
+        // después de onCreateActionMode().
+        override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?)
+                : Boolean {
+            return false
+        }
+
+        // Se llama cuando el usuario sale del modo de acción.
+        override fun onDestroyActionMode(mode: ActionMode?) {
+            actionMode = null
         }
     }
 
