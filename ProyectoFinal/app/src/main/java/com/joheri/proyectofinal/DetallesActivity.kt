@@ -2,7 +2,11 @@ package com.joheri.proyectofinal
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.joheri.proyectofinal.databinding.ActivityBibliotecaBinding
 import com.joheri.proyectofinal.databinding.ActivityDetallesBinding
@@ -66,5 +70,40 @@ class DetallesActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflate = menuInflater
+        inflate.inflate(R.menu.menu_detalles, menu)
+        return true
+    }
+
+    /**
+     * Método encargado de gestionar las opciones pulsadas del menú.
+     */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.e -> {
+                Log.d("MENU", "${getString(R.string.op1)} seleccionada")
+                myToast("${getString(R.string.op1)} seleccionada")
+                true
+            }
+            R.id.op02 -> { // Esta opción no haría falta, ya que abre un submenú.
+                Log.d("MENU", "${getString(R.string.op2)} seleccionada")
+                myToast("${getString(R.string.op2)} seleccionada")
+                true
+            }
+
+            R.id.op021 -> {
+                Log.d("MENU", "${getString(R.string.op21)} seleccionada")
+                myToast("${getString(R.string.op21)} seleccionada")
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+    private fun myToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
     }
 }
