@@ -5,7 +5,7 @@
         android:icon="@android:drawable/ic_menu_delete"
         android:title="Borrar" />
     <item
-        android:id="@+id/optionShare"
-        android:icon="@android:drawable/btn_star_big_on"
-        android:title="Favoritos" />
+        android:id="@+id/optionEdit"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="Editar" />
 </menu>

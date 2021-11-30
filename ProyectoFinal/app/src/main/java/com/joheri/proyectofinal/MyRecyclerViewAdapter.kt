@@ -3,6 +3,7 @@ package com.joheri.proyectofinal
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
@@ -132,17 +133,30 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
 
             return when (item!!.itemId) {
                 R.id.optionDelete -> {
-
                     Toast.makeText(context, "Eliminar el elemento: ${cursor.getString(0)}", Toast.LENGTH_LONG)
                         .show()
                     val db = MyDBOpenHelper(context, null)
                     db.delJuego(cursor.getInt(0))
+                    cursor = db.readableDatabase.rawQuery(
+                        "SELECT * FROM juegos;", null
+                    )
+                    notifyDataSetChanged()
                     mode!!.finish()
                     return true
                 }
-                R.id.optionShare -> {
-                    Toast.makeText(context, "Compartir", Toast.LENGTH_LONG)
+                R.id.optionEdit -> {
+                    Toast.makeText(context, "Editar", Toast.LENGTH_LONG)
                         .show()
+                    val intent = Intent(context, DetallesActivity::class.java).apply {
+                        putExtra("codigo", cursor.getString(0))
+                        putExtra("nombre", cursor.getString(1))
+                        putExtra("genero", cursor.getString(2))
+                        putExtra("año", cursor.getString(3))
+                        putExtra("compañia", cursor.getString(4))
+                        putExtra("consola", cursor.getString(5))
+                        putExtra("imagen", cursor.getString(6))
+                    }
+                    startActivity(context, intent, null)
                     return true
                 }
                 else -> false

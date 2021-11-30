@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
         juegosDBHelper = MyDBOpenHelper(this, null)
         var juego = Juego(1, "Pokémon Rojo", "RPG", 1998, "Nintendo", "Game Boy", "https://static.wikia.nocookie.net/espokemon/images/d/db/Car%C3%A1tula_de_Pok%C3%A9mon_Rojo.jpg/revision/latest?cb=20160715095430")
-        //juegosDBHelper.addJuego(juego)
+        juegosDBHelper.addJuego(juego)
 
         binding.caratulaET.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
