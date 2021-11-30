@@ -103,4 +103,24 @@ class MyDBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         db.close()
 
     }
+
+    /**
+     * Método para actualizar el nombre de un amigo de la tabla por el id.
+     */
+    fun updateJuego(identifier: Int, juego: Juego) {
+        val args = arrayOf(identifier.toString())
+
+        // Se crea un ArrayMap<>() con los datos nuevos.
+        val data = ContentValues()
+        data.put("nombre", juego.nombre)
+        data.put("genero", juego.genero)
+        data.put("año", juego.anyo)
+        data.put("compañia", juego.compania)
+        data.put("consola", juego.consola)
+        data.put("caratula_url", juego.caratulaURL)
+
+        val db = this.writableDatabase
+        db.update("juegos", data, "codigo = $identifier", args)
+        db.close()
+    }
 }
