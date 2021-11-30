@@ -1,11 +1,14 @@
 package com.joheri.practica03
 
 import android.content.Context.MODE_APPEND
+import android.content.DialogInterface
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.joheri.practica03.databinding.FragmentoCalculoBinding
 import java.io.IOException
@@ -63,7 +66,7 @@ class FragmentoCalculo : Fragment() {
                     //Mostramos el textView con la característica
                     binding.caracterSticaTV.visibility = View.VISIBLE
 
-                    escribirTextoFormateado(
+                    escribirTextoFormateadoConDialog(
                         nuevaFecha.dia.toString(), mesNumeroACadeena
                             (nuevaFecha.mes.toString()), nuevaFecha.anyo.toString(),
                         binding.nombrePT.text.toString(), edad.toString(), genero
@@ -115,6 +118,18 @@ class FragmentoCalculo : Fragment() {
             dia + ";" + mes + ";" + anyo + ";" + nombre + ";" + edad + ";" + genero
         escribirEnFichero(textoFichero)
     }
+    fun escribirTextoFormateadoConDialog(
+        dia: String,
+        mes: String,
+        anyo: String,
+        nombre: String,
+        edad: String,
+        genero: String
+    ) {
+        val textoFichero: String =
+            dia + ";" + mes + ";" + anyo + ";" + nombre + ";" + edad + ";" + genero
+        myAlertDialog(textoFichero)
+    }
 
     // Escribimos los datos separados por punto y coma en el fichero y lo guardamos
     // para posteriormente mostrarlo en el historial y dejarlos guardados. De esta
@@ -158,5 +173,26 @@ class FragmentoCalculo : Fragment() {
                 return getString(R.string.jubilada)
         }
         return ""
+    }
+    private fun myAlertDialog(datos: String) {
+        val builder = AlertDialog.Builder(requireActivity())
+        // Se crea el AlertDialog.
+        builder.apply {
+            // Se asigna un título.
+            setTitle("Historial")
+            // Se asgina el cuerpo del mensaje.
+            setMessage("¿Quieres guardar esta persona en el historial?")
+            // Se define el comportamiento de los botones.
+            setPositiveButton(
+                android.R.string.ok){_,_ ->
+                escribirEnFichero(datos)
+            }
+            setNegativeButton(android.R.string.no) { _, _ ->
+                Toast.makeText(context, android.R.string.no, Toast.LENGTH_SHORT).show()
+                binding.root.setBackgroundColor(Color.RED)
+            }
+        }
+        // Se muestra el AlertDialog.
+        builder.show()
     }
 }
