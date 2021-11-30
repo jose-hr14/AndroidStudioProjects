@@ -9,6 +9,7 @@ import com.joheri.proyectofinal.databinding.ActivityDetallesBinding
 
 class DetallesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetallesBinding
+    private lateinit var  juego: Juego
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetallesBinding.inflate(layoutInflater)
@@ -52,7 +53,7 @@ class DetallesActivity : AppCompatActivity() {
         {
             val db = MyDBOpenHelper(this, null)
             val juego = Juego(intent.getStringExtra("codigo")?.toInt(), binding.nombreET2.text.toString(), binding.generoET2.text.toString(), binding.anyoET2.text.toString().toInt(), binding.companiaET2.text.toString(), binding.consolaET2.text.toString(), intent.getStringExtra("imagen"))
-            db.updateJuego(intent.getStringExtra("codigo")!!.toInt(), juego )
+            db.updateJuego(juego.codigo!!, juego )
 
         }
 
