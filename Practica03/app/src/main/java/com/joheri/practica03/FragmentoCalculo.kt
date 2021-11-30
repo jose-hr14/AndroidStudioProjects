@@ -1,5 +1,6 @@
 package com.joheri.practica03
 
+import android.content.Context
 import android.content.Context.MODE_APPEND
 import android.content.DialogInterface
 import android.graphics.Color
@@ -7,9 +8,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.google.android.material.snackbar.Snackbar
 import com.joheri.practica03.databinding.FragmentoCalculoBinding
 import java.io.IOException
 import java.io.PrintWriter
@@ -20,12 +23,13 @@ class FragmentoCalculo : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentoCalculoBinding.inflate(inflater, container, false)
 
         //Configuramos el evento que se desarrolla al pulsar el botón
         binding.calcularBoton.setOnClickListener()
         {
+            esconderTeclado()
             //Llevamos a cabo la ejecución de las instrucciones solo cuando los campos estén llenos
             if (binding.nombrePT.text.isNotEmpty() && binding.diaPT.text.isNotEmpty()
                 && binding.mesPT.text.isNotEmpty() && binding.anyoPT.text.isNotEmpty()
@@ -71,16 +75,15 @@ class FragmentoCalculo : Fragment() {
                             (nuevaFecha.mes.toString()), nuevaFecha.anyo.toString(),
                         binding.nombrePT.text.toString(), edad.toString(), genero
                     )
-
                 }
                 //Si la fecha es incorrecta, avisamos al usuario
                 else
-                    mostrarToast(getString(R.string.fechaIncorrecta))
+                    mostrarSnackBar(getString(R.string.fechaIncorrecta))
 
             }
             //Si alguno de los campos está vacío, avisamos al usuario
             else
-                mostrarToast(getString(R.string.faltanDatos))
+                mostrarSnackBar(getString(R.string.faltanDatos))
         }
         return binding.root
     }
@@ -88,18 +91,18 @@ class FragmentoCalculo : Fragment() {
     //Convierte el número del mes al nombre del mes
     fun mesNumeroACadeena(mes: String): String {
         when (mes) {
-            "1" -> return "Enero"
-            "2" -> return "Febrero"
-            "3" -> return "Marzo"
-            "4" -> return "Abril"
-            "5" -> return "Mayo"
-            "6" -> return "Junio"
-            "7" -> return "Julio"
-            "8" -> return "Agosto"
-            "9" -> return "Septiembre"
-            "10" -> return "Octubre"
-            "11" -> return "Noviembre"
-            "12" -> return "Diciembre"
+            "1" -> return getString(R.string.enero)
+            "2" -> return getString(R.string.febrero)
+            "3" -> return getString(R.string.marzo)
+            "4" -> return getString(R.string.abril)
+            "5" -> return getString(R.string.mayo)
+            "6" -> return getString(R.string.junio)
+            "7" -> return getString(R.string.julio)
+            "8" -> return getString(R.string.agosto)
+            "9" -> return getString(R.string.septiembre)
+            "10" -> return getString(R.string.octubre)
+            "11" -> return getString(R.string.noviembre)
+            "12" -> return getString(R.string.diciembre)
             else -> return ""
         }
     }
@@ -116,7 +119,8 @@ class FragmentoCalculo : Fragment() {
     ) {
         val textoFichero: String =
             dia + ";" + mes + ";" + anyo + ";" + nombre + ";" + edad + ";" + genero
-        escribirEnFichero(textoFichero)
+        myAlertDialog(textoFichero)
+        //escribirEnFichero(textoFichero)
     }
     fun escribirTextoFormateadoConDialog(
         dia: String,
@@ -137,19 +141,14 @@ class FragmentoCalculo : Fragment() {
     fun escribirEnFichero(datos: String) {
         try {
             val writer =
-                PrintWriter(activity?.openFileOutput(getString(R.string.filename), MODE_APPEND))
+                PrintWriter(context?.openFileOutput(getString(R.string.filename), MODE_APPEND))
             writer.println(datos)
             writer.flush()
             writer.close()
-            Toast.makeText(activity, "Correcto", Toast.LENGTH_SHORT).show()
+            mostrarSnackBar(getString(R.string.usuarioGuardado))
         } catch (e: IOException) {
             Toast.makeText(activity, e.message, Toast.LENGTH_LONG).show()
         }
-    }
-
-    //Función para mostrar el toast
-    fun mostrarToast(texto: String) {
-        Toast.makeText(activity, texto, Toast.LENGTH_SHORT).show()
     }
 
     //Función para devolver la característica de la persona

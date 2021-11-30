@@ -24,10 +24,25 @@
     <string name="jubilado">Jubilado</string>
     <string name="jubilada">Jubilada</string>
     <string name="a_o">Año</string>
-    <string name="g_nero">Género</string>
+    <string name="genero">Género</string>
     <string name="edad">Edad</string>
     <string name="edad_num">Edad Num</string>
     <string name="historial">Historial</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="usuarioGuardado">Usuario guardado</string>
+    <string name="enero">Enero</string>
+    <string name="febrero">Febrero</string>
+    <string name="marzo">Marzo</string>
+    <string name="abril">Abril</string>
+    <string name="mayo">Mayo</string>
+    <string name="junio">Junio</string>
+    <string name="julio">Julio</string>
+    <string name="agosto">Agosto</string>
+    <string name="septiembre">Septiembre</string>
+    <string name="octubre">Octubre</string>
+    <string name="noviembre">Noviembre</string>
+    <string name="diciembre">Diciembre</string>
 </resources>
