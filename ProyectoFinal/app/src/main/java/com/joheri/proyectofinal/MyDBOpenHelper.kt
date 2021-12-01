@@ -9,18 +9,10 @@ import android.database.sqlite.SQLiteOpenHelper
 class MyDBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
 
-    val TAG = "SQLite"
-
     companion object {
         val DATABASE_VERSION = 1
         val DATABASE_NAME = "juegos.db"
         val TABLA_JUEGOS = "juegos"
-        val JUEGOS_CODIGO = "codigo"
-        val JUEGOS_NOMBRE = "nombre"
-        val JUEGOS_GENERO = "genero"
-        val JUEGOS_ANYO = "año"
-        val JUEGOS_COMPANIA = "compania"
-        val JUEGOS_CONSOLA = "consola"
     }
 
     /**

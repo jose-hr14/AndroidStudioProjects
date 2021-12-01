@@ -3,12 +3,13 @@ package com.joheri.proyectofinal
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -133,14 +134,24 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
 
             return when (item!!.itemId) {
                 R.id.optionDelete -> {
-                    Toast.makeText(context, "Eliminar el elemento: ${cursor.getString(0)}", Toast.LENGTH_LONG)
-                        .show()
-                    val db = MyDBOpenHelper(context, null)
-                    db.delJuego(cursor.getInt(0))
-                    cursor = db.readableDatabase.rawQuery(
-                        "SELECT * FROM juegos;", null
-                    )
-                    notifyDataSetChanged()
+                    val builder = AlertDialog.Builder(context)
+                    builder.setTitle("Confirmación")
+                    builder.setMessage("¿Seguro que quieres borrar el juego?")
+                    builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+                        Toast.makeText(context,
+                            android.R.string.yes, Toast.LENGTH_SHORT).show()
+                        val db = MyDBOpenHelper(context, null)
+                        db.delJuego(cursor.getInt(0))
+                        cursor = db.readableDatabase.rawQuery(
+                            "SELECT * FROM juegos;", null
+                        )
+                        notifyDataSetChanged()
+                    }
+                    builder.setNegativeButton(android.R.string.no) { dialog, which ->
+                        Toast.makeText(context,
+                            android.R.string.no, Toast.LENGTH_SHORT).show()
+                    }
+                    builder.show()
                     mode!!.finish()
                     return true
                 }
@@ -185,5 +196,4 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
             actionMode = null
         }
     }
-
 }

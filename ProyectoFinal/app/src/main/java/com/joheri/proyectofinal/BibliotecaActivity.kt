@@ -17,7 +17,7 @@ class BibliotecaActivity : AppCompatActivity() {
         binding = ActivityBibliotecaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setTitle("Biblioteca juegos")
+        title = "Biblioteca juegos"
 
         setUpRecyclerView()
     }

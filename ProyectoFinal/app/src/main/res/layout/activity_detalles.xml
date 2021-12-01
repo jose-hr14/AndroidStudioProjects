@@ -8,10 +8,11 @@
 
     <TextView
         android:id="@+id/consolaTV2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Consola"
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/nombreTV2"
         app:layout_constraintHorizontal_bias="0.487"
@@ -20,10 +21,11 @@
 
     <TextView
         android:id="@+id/companiaTV2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Compañía"
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/nombreTV2"
         app:layout_constraintHorizontal_bias="0.487"
@@ -32,10 +34,11 @@
 
     <TextView
         android:id="@+id/anyoTV2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Año"
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/nombreTV2"
         app:layout_constraintHorizontal_bias="0.487"
@@ -44,10 +47,11 @@
 
     <TextView
         android:id="@+id/generoTV2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Género"
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/nombreTV2"
         app:layout_constraintHorizontal_bias="0.501"
@@ -56,10 +60,11 @@
 
     <TextView
         android:id="@+id/nombreTV2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Nombre"
+        android:textAlignment="center"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

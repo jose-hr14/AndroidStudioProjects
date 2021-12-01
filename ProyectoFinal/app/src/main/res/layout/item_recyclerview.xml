@@ -23,9 +23,10 @@
 
         <TextView
             android:id="@+id/consolaTV"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -58,7 +59,7 @@
 
         <TextView
             android:id="@+id/nombreTV"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:textAlignment="center"
@@ -73,9 +74,10 @@
 
         <TextView
             android:id="@+id/generoTV"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toTopOf="@+id/anyoTV"
@@ -87,9 +89,10 @@
 
         <TextView
             android:id="@+id/anyoTV"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toTopOf="@+id/companitaTV"
@@ -101,9 +104,10 @@
 
         <TextView
             android:id="@+id/companitaTV"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textAlignment="center"
             android:textSize="18sp"
             android:textStyle="italic"
             app:layout_constraintBottom_toTopOf="@+id/consolaTV"
