@@ -6,7 +6,6 @@ import android.database.Cursor
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
-import android.widget.PopupMenu
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -46,10 +45,12 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
         )
     }
 
+    override fun getItemId(position: Int): Long {
+        return super.getItemId(position)
+    }
+
     override fun getItemCount(): Int {
-        return if (cursor != null)
-            cursor.count
-        else 0
+        return cursor.count
     }
 
     /**
@@ -142,10 +143,14 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
                             android.R.string.yes, Toast.LENGTH_SHORT).show()
                         val db = MyDBOpenHelper(context, null)
                         db.delJuego(cursor.getInt(0))
-                        cursor = db.readableDatabase.rawQuery(
+                        /*cursor = db.readableDatabase.rawQuery(
                             "SELECT * FROM juegos;", null
                         )
-                        notifyDataSetChanged()
+                        notifyDataSetChanged()*/
+                        notifyItemRemoved(cursor.position);
+                        notifyItemRangeChanged(cursor.position, cursor.count)
+
+
                     }
                     builder.setNegativeButton(android.R.string.no) { dialog, which ->
                         Toast.makeText(context,
