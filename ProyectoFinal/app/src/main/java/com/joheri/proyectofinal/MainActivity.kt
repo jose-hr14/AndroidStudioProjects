@@ -2,17 +2,12 @@ package com.joheri.proyectofinal
 
 import android.content.Intent
 import android.database.Cursor
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.PopupMenu
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.joheri.proyectofinal.databinding.ActivityMainBinding
-import java.security.AccessController.getContext
-import android.R
-import android.view.Menu
-import android.view.View
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,15 +21,10 @@ class MainActivity : AppCompatActivity() {
 
         juegosDBHelper = MyDBOpenHelper(this, null)
 
-        var db = juegosDBHelper.readableDatabase
+        val db = juegosDBHelper.readableDatabase
         val cursor: Cursor = db.rawQuery(
             "SELECT count(*) FROM juegos;", null
         )
-        if(cursor!=null && cursor.getCount()>0)
-        {
-            getJuegos()
-        }
-
         binding.caratulaET.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 Glide.with(binding.root).load(binding.caratulaET.text.toString()).into(binding.caratulaIImageView)
@@ -49,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.anadirJuegoButton.setOnClickListener()
         {
-            val juego = Juego(1, binding.nombreET.text.toString(), binding.generoET.text.toString(), binding.anyoET.text.toString().toInt(), binding.companiaET.text.toString(), binding.consolaET.text.toString(), binding.caratulaET.text.toString())
+            val juego = Juego(null, binding.nombreET.text.toString(), binding.generoET.text.toString(), binding.anyoET.text.toString().toInt(), binding.companiaET.text.toString(), binding.consolaET.text.toString(), binding.caratulaET.text.toString())
             juegosDBHelper.addJuego(juego)
         }
         binding.bibliotecaButton.setOnClickListener()

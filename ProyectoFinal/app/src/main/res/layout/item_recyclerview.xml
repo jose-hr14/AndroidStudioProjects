@@ -40,21 +40,20 @@
             android:id="@+id/juegoIMG"
             android:layout_width="210dp"
             android:layout_height="234dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/tvIdentificador"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/nombreTV"
             app:srcCompat="@android:mipmap/sym_def_app_icon" />
 
         <TextView
             android:id="@+id/tvIdentificador"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
+            android:textAlignment="textEnd"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/consolaTV"
             tools:text="id" />
 
         <TextView

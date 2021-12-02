@@ -112,6 +112,12 @@ class DetallesActivity : AppCompatActivity() {
         binding.borrarButton.visibility = View.INVISIBLE
         binding.actualizarButton.visibility = View.INVISIBLE
         binding.editarButton.visibility = View.VISIBLE
+
+        binding.nombreTV2.setText(binding.nombreET2.text)
+        binding.generoTV2.setText(binding.generoET2.text)
+        binding.anyoTV2.setText(binding.anyoET2.text)
+        binding.companiaTV2.setText(binding.companiaET2.text)
+        binding.consolaTV2.setText(binding.consolaET2.text)
     }
 
     private fun myToast(msg: String) {

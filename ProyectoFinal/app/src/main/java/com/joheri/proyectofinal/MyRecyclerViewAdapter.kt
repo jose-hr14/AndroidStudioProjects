@@ -82,10 +82,11 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
         val compania: TextView
         val consola: TextView
         val imagen: ImageView
+        val posicion: Int
 
         constructor(view: View) : super(view) {
-
             // Se enlazan los elementos de la UI mediante ViewBinding.
+            this.posicion = adapterPosition
             val bindingItemsRV = ItemRecyclerviewBinding.bind(view)
             this.codigo = bindingItemsRV.tvIdentificador
             this.nombre = bindingItemsRV.nombreTV
@@ -96,7 +97,11 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
             this.imagen = bindingItemsRV.juegoIMG
 
             view.setOnClickListener {
-                Toast.makeText(context, "${this.codigo.text}-${this.nombre.text} ${this.consola.text}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    context,
+                    "${this.codigo.text}-${this.nombre.text} ${this.consola.text}",
+                    Toast.LENGTH_SHORT
+                ).show()
                 val intent = Intent(context, DetallesActivity::class.java).apply {
                     putExtra("codigo", codigo.text)
                     putExtra("nombre", nombre.text)
@@ -123,82 +128,82 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
                 return@setOnLongClickListener true
             }
         }
-    }
-
-    /**
-     * Modo de acción contextual.
-     */
-    private val actionModeCallback = object : ActionMode.Callback {
-        // Método llamado al selección una opción del menú.
-        override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?)
-                : Boolean {
-
-            return when (item!!.itemId) {
-                R.id.optionDelete -> {
-                    val builder = AlertDialog.Builder(context)
-                    builder.setTitle("Confirmación")
-                    builder.setMessage("¿Seguro que quieres borrar el juego?")
-                    builder.setPositiveButton(android.R.string.yes) { dialog, which ->
-                        Toast.makeText(context,
-                            android.R.string.yes, Toast.LENGTH_SHORT).show()
-                        val db = MyDBOpenHelper(context, null)
-                        db.delJuego(cursor.getInt(0))
-                        /*cursor = db.readableDatabase.rawQuery(
-                            "SELECT * FROM juegos;", null
-                        )
-                        notifyDataSetChanged()*/
-                        notifyItemRemoved(cursor.position);
-                        notifyItemRangeChanged(cursor.position, cursor.count)
 
 
+        /**
+         * Modo de acción contextual.
+         */
+        private val actionModeCallback = object : ActionMode.Callback {
+            // Método llamado al selección una opción del menú.
+            override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?)
+                    : Boolean {
+
+                return when (item!!.itemId) {
+                    R.id.optionDelete -> {
+                        val builder = AlertDialog.Builder(context)
+                        builder.setTitle("Confirmación")
+                        builder.setMessage("¿Seguro que quieres borrar el juego?")
+                        builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+                            val db = MyDBOpenHelper(context, null)
+                            db.delJuego(cursor.getInt(0))
+                            cursor = db.readableDatabase.rawQuery(
+                                "SELECT * FROM juegos;", null
+                            )
+                            notifyItemRemoved(adapterPosition)
+                            notifyItemRangeChanged(adapterPosition, getItemCount())
+                        }
+                        builder.setNegativeButton(android.R.string.no) { dialog, which ->
+                            Toast.makeText(
+                                context,
+                                android.R.string.no, Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        builder.show()
+                        mode!!.finish()
+                        return true
                     }
-                    builder.setNegativeButton(android.R.string.no) { dialog, which ->
-                        Toast.makeText(context,
-                            android.R.string.no, Toast.LENGTH_SHORT).show()
+                    R.id.optionEdit -> {
+                        Toast.makeText(context, "Editar", Toast.LENGTH_LONG)
+                            .show()
+                        val intent = Intent(context, DetallesActivity::class.java).apply {
+                            putExtra("codigo", cursor.getString(0))
+                            putExtra("nombre", cursor.getString(1))
+                            putExtra("genero", cursor.getString(2))
+                            putExtra("año", cursor.getString(3))
+                            putExtra("compañia", cursor.getString(4))
+                            putExtra("consola", cursor.getString(5))
+                            putExtra("imagen", cursor.getString(6))
+                        }
+                        startActivity(context, intent, null)
+                        return true
                     }
-                    builder.show()
-                    mode!!.finish()
-                    return true
+                    else -> false
                 }
-                R.id.optionEdit -> {
-                    Toast.makeText(context, "Editar", Toast.LENGTH_LONG)
-                        .show()
-                    val intent = Intent(context, DetallesActivity::class.java).apply {
-                        putExtra("codigo", cursor.getString(0))
-                        putExtra("nombre", cursor.getString(1))
-                        putExtra("genero", cursor.getString(2))
-                        putExtra("año", cursor.getString(3))
-                        putExtra("compañia", cursor.getString(4))
-                        putExtra("consola", cursor.getString(5))
-                        putExtra("imagen", cursor.getString(6))
-                    }
-                    startActivity(context, intent, null)
-                    return true
-                }
-                else -> false
+            }
+
+
+            // Llamado cuando al crear el modo acción a través de startActionMode().
+            override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+                //val inflater = mActivity?.menuInflater
+                // Así no necesito la activity
+                val inflater = mode?.menuInflater
+                inflater?.inflate(R.menu.action_mode_menu, menu)
+                return true
+            }
+
+            // Se llama cada vez que el modo acción se muestra, siempre
+            // después de onCreateActionMode().
+            override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?)
+                    : Boolean {
+                return false
+            }
+
+            // Se llama cuando el usuario sale del modo de acción.
+            override fun onDestroyActionMode(mode: ActionMode?) {
+                actionMode = null
             }
         }
 
 
-        // Llamado cuando al crear el modo acción a través de startActionMode().
-        override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-            //val inflater = mActivity?.menuInflater
-            // Así no necesito la activity
-            val inflater = mode?.menuInflater
-            inflater?.inflate(R.menu.action_mode_menu, menu)
-            return true
-        }
-
-        // Se llama cada vez que el modo acción se muestra, siempre
-        // después de onCreateActionMode().
-        override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?)
-                : Boolean {
-            return false
-        }
-
-        // Se llama cuando el usuario sale del modo de acción.
-        override fun onDestroyActionMode(mode: ActionMode?) {
-            actionMode = null
-        }
     }
 }
