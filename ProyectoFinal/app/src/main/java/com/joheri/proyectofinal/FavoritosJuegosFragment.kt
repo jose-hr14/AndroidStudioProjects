@@ -1,6 +1,5 @@
 package com.joheri.proyectofinal
 
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.joheri.proyectofinal.databinding.FragmentFavoritosJuegosBinding
-import com.joheri.proyectofinal.databinding.FragmentTodosJuegosBinding
 
 class FavoritosJuegosFragment : Fragment() {
     private lateinit var binding: FragmentFavoritosJuegosBinding
@@ -34,7 +32,7 @@ class FavoritosJuegosFragment : Fragment() {
         db = juegosDB.readableDatabase
         var cursor = db.rawQuery("SELECT * FROM juegos WHERE favorito = 1;", null)
         // Se crea el adaptador con el resultado del cursor.
-        val myRecyclerViewAdapter = MyRecyclerViewAdapter()
+        val myRecyclerViewAdapter = RecyclerViewAdapter2()
         myRecyclerViewAdapter.MyRecyclerViewAdapter(requireActivity(), cursor)
         // Montamos el RecyclerView.
         binding.myRecyclerview.setHasFixedSize(true)
@@ -45,4 +43,5 @@ class FavoritosJuegosFragment : Fragment() {
         super.onResume()
         setUpRecyclerView()
     }
+
 }

@@ -3,7 +3,6 @@ package com.joheri.proyectofinal
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
-import android.opengl.Visibility
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
@@ -16,7 +15,7 @@ import com.bumptech.glide.Glide
 import com.joheri.proyectofinal.databinding.ItemRecyclerviewBinding
 
 
-class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder>() {
+class RecyclerViewAdapter2 : RecyclerView.Adapter<RecyclerViewAdapter2.ViewHolder>() {
 
     private lateinit var context: Context
     private lateinit var cursor: Cursor
@@ -77,8 +76,6 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
             holder.noFavImageView.visibility = View.GONE
             holder.favImageView.visibility = View.VISIBLE
         }
-
-
     }
 
     inner class ViewHolder : RecyclerView.ViewHolder {
@@ -121,7 +118,7 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
                     putExtra("año", anyo.text)
                     putExtra("compañia", compania.text)
                     putExtra("consola", consola.text)
-                    cursor.moveToPosition(position)
+                    cursor.moveToPosition(adapterPosition)
                     putExtra("imagen", cursor.getString(6))
                 }
                 startActivity(context, intent, null)
@@ -130,7 +127,7 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
                 when (actionMode) {
                     null -> {
                         // Se lanza el ActionMode.
-                        cursor.moveToPosition(position)
+                        cursor.moveToPosition(adapterPosition)
                         actionMode = it.startActionMode(actionModeCallback)
                         it.isSelected = true
                         true
@@ -154,6 +151,8 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
                 database.desmarcarFavorito(cursor.getInt(0))
                 favImageView.visibility = View.GONE
                 noFavImageView.visibility = View.VISIBLE
+                cursor = database.readableDatabase.rawQuery("SELECT * FROM juegos WHERE favorito = 1;", null)
+                notifyDataSetChanged()
             }
         }
 
@@ -173,9 +172,10 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
                         builder.setMessage("¿Seguro que quieres borrar el juego?")
                         builder.setPositiveButton(android.R.string.yes) { dialog, which ->
                             val db = MyDBOpenHelper(context, null)
+                            cursor.moveToPosition(adapterPosition)
                             db.delJuego(cursor.getInt(0))
                             cursor = db.readableDatabase.rawQuery(
-                                "SELECT * FROM juegos;", null
+                                "SELECT * FROM juegos WHERE favorito = 1;", null
                             )
                             notifyItemRemoved(adapterPosition)
                             notifyItemRangeChanged(adapterPosition, getItemCount())
@@ -191,8 +191,6 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
                         return true
                     }
                     R.id.optionEdit -> {
-                        Toast.makeText(context, "Editar", Toast.LENGTH_LONG)
-                            .show()
                         val intent = Intent(context, DetallesActivity::class.java).apply {
                             putExtra("codigo", cursor.getString(0))
                             putExtra("nombre", cursor.getString(1))

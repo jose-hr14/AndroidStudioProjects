@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.joheri.proyectofinal.databinding.ActivityBibliotecaBinding
 import com.joheri.proyectofinal.databinding.FragmentTodosJuegosBinding
 
 class TodosJuegosFragment : Fragment() {
@@ -41,7 +40,7 @@ class TodosJuegosFragment : Fragment() {
         db = juegosDB.readableDatabase
         cursor = db.rawQuery("SELECT * FROM juegos;", null)
         // Se crea el adaptador con el resultado del cursor.
-        val myRecyclerViewAdapter = MyRecyclerViewAdapter()
+        val myRecyclerViewAdapter = FavoritosRecyclerViewAdapter()
         myRecyclerViewAdapter.MyRecyclerViewAdapter(requireActivity(), cursor)
         // Montamos el RecyclerView.
         binding.myRecyclerview.setHasFixedSize(true)
