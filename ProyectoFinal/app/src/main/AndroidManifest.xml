@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoFinal">
         <activity
+            android:name=".NuevaBiblioteca"
+            android:exported="true" />
+        <activity
             android:name=".DetallesActivity"
             android:exported="false"
             android:parentActivityName=".BibliotecaActivity" />

@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         }
         binding.bibliotecaButton.setOnClickListener()
         {
-            val myIntent = Intent(this@MainActivity, BibliotecaActivity::class.java)
+            val myIntent = Intent(this@MainActivity, NuevaBiblioteca::class.java)
             startActivity(myIntent)
         }
         binding.button.setOnClickListener()

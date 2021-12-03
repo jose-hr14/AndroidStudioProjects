@@ -79,7 +79,6 @@ class FragmentoCalculo : Fragment() {
                 //Si la fecha es incorrecta, avisamos al usuario
                 else
                     mostrarSnackBar(getString(R.string.fechaIncorrecta))
-
             }
             //Si alguno de los campos está vacío, avisamos al usuario
             else
