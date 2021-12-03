@@ -40,9 +40,9 @@
             android:id="@+id/juegoIMG"
             android:layout_width="210dp"
             android:layout_height="234dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tvIdentificador"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/nombreTV"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@android:mipmap/sym_def_app_icon" />
 
         <TextView
@@ -115,6 +115,28 @@
             app:layout_constraintStart_toStartOf="@+id/nombreTV"
             app:layout_constraintTop_toBottomOf="@+id/anyoTV"
             tools:text="Compañía" />
+
+        <ImageView
+            android:id="@+id/noFavImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/juegoIMG"
+            app:srcCompat="@android:drawable/btn_star_big_off" />
+
+        <ImageView
+            android:id="@+id/favImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/juegoIMG"
+            app:srcCompat="@android:drawable/btn_star_big_on" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

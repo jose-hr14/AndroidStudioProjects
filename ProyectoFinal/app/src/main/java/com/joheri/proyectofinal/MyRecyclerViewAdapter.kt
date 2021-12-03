@@ -3,6 +3,7 @@ package com.joheri.proyectofinal
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
+import android.opengl.Visibility
 import android.util.Log
 import android.view.*
 import android.widget.ImageView
@@ -71,6 +72,13 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
         holder.compania.text = cursor.getString(4)
         holder.consola.text = cursor.getString(5)
         Glide.with(context).load(cursor.getString(6)).into(holder.imagen)
+        if(cursor.getInt(7) == 1)
+        {
+            holder.noFavImageView.visibility = View.GONE
+            holder.favImageView.visibility = View.VISIBLE
+        }
+
+
     }
 
     inner class ViewHolder : RecyclerView.ViewHolder {
@@ -83,6 +91,8 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
         val consola: TextView
         val imagen: ImageView
         val posicion: Int
+        val noFavImageView: ImageView
+        val favImageView: ImageView
 
         constructor(view: View) : super(view) {
             // Se enlazan los elementos de la UI mediante ViewBinding.
@@ -95,6 +105,8 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
             this.compania = bindingItemsRV.companitaTV
             this.consola = bindingItemsRV.consolaTV
             this.imagen = bindingItemsRV.juegoIMG
+            this.noFavImageView = bindingItemsRV.noFavImageView
+            this.favImageView = bindingItemsRV.favImageView
 
             view.setOnClickListener {
                 Toast.makeText(
@@ -126,6 +138,22 @@ class MyRecyclerViewAdapter : RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHol
                     else -> false
                 }
                 return@setOnLongClickListener true
+            }
+            noFavImageView.setOnClickListener()
+            {
+                cursor.moveToPosition(adapterPosition)
+                var database = MyDBOpenHelper(context, null)
+                database.marcarFavorito(cursor.getInt(0))
+                noFavImageView.visibility = View.GONE
+                favImageView.visibility = View.VISIBLE
+            }
+            favImageView.setOnClickListener()
+            {
+                cursor.moveToPosition(adapterPosition)
+                var database = MyDBOpenHelper(context, null)
+                database.desmarcarFavorito(cursor.getInt(0))
+                favImageView.visibility = View.GONE
+                noFavImageView.visibility = View.VISIBLE
             }
         }
 

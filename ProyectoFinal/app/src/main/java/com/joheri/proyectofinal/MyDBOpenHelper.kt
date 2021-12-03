@@ -21,21 +21,8 @@ class MyDBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
      */
     override fun onCreate(db: SQLiteDatabase?) {
         try {
-            val crearTablaJuegos = "CREATE TABLE juegos (codigo INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, genero TEXT, año INTEGER, compañia INTEGER, consola TEXT, caratula_url TEXT)"
+            val crearTablaJuegos = "CREATE TABLE juegos (codigo INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, genero TEXT, año INTEGER, compañia INTEGER, consola TEXT, caratula_url TEXT, favorito INTEGER);"
             db!!.execSQL(crearTablaJuegos)
-
-/*            var juego = Juego(1, "Pokémon Rojo", "RPG", 1998, "Nintendo", "Game Boy")
-            this.addJuego(juego)
-            juego = Juego(1, "Pokémon Azul", "RPG", 1998, "Nintendo", "Game Boy")
-            this.addJuego(juego)
-            juego = Juego(1, "Pokémon Amarillo", "RPG", 1998, "Nintendo", "Game Boy")
-            this.addJuego(juego)
-            juego = Juego(1, "Pokémon Oro", "RPG", 1998, "Nintendo", "Game Boy")
-            this.addJuego(juego)
-            juego = Juego(1, "Pokémon Plata", "RPG", 1998, "Nintendo", "Game Boy")
-            this.addJuego(juego)
-            juego = Juego(1, "Pokémon Cristal", "RPG", 1998, "Nintendo", "Game Boy")
-            this.addJuego(juego)*/
         } catch (e: SQLiteException) {
             e.printStackTrace()
         }
@@ -75,6 +62,7 @@ class MyDBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         data.put("compañia", juego.compania)
         data.put("consola", juego.consola)
         data.put("caratula_url", juego.caratulaURL)
+        data.put("favorito", 0)
         //this.writableDatabase.execSQL("INSERT INTO juegos (nombre, genero, año, compañia, consola) VALUES('nombre', 'genero', 'año', 'compañia', 'cosola'"));
         // Se abre la BD en modo escritura.
         val db = this.writableDatabase
@@ -110,6 +98,30 @@ class MyDBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         data.put("compañia", juego.compania)
         data.put("consola", juego.consola)
         data.put("caratula_url", juego.caratulaURL)
+
+        val db = this.writableDatabase
+        db.update("juegos", data, "codigo = ?", args)
+        db.close()
+    }
+
+    fun marcarFavorito(identifier: Int) {
+        val args = arrayOf(identifier.toString())
+
+        // Se crea un ArrayMap<>() con los datos nuevos.
+        val data = ContentValues()
+        data.put("favorito", 1)
+
+        val db = this.writableDatabase
+        db.update("juegos", data, "codigo = ?", args)
+        db.close()
+    }
+
+    fun desmarcarFavorito(identifier: Int) {
+        val args = arrayOf(identifier.toString())
+
+        // Se crea un ArrayMap<>() con los datos nuevos.
+        val data = ContentValues()
+        data.put("favorito", 0)
 
         val db = this.writableDatabase
         db.update("juegos", data, "codigo = ?", args)
