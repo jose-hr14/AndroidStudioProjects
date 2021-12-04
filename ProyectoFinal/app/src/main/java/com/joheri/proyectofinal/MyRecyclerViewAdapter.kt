@@ -15,18 +15,19 @@ import com.bumptech.glide.Glide
 import com.joheri.proyectofinal.databinding.ItemRecyclerviewBinding
 
 
-class RecyclerViewAdapter2 : RecyclerView.Adapter<RecyclerViewAdapter2.ViewHolder>() {
+class MyRecyclerViewAdapter :
+    RecyclerView.Adapter<MyRecyclerViewAdapter.ViewHolder>() {
 
     private lateinit var context: Context
     private lateinit var cursor: Cursor
     private var actionMode: ActionMode? = null
+    private lateinit var sql: String
 
-    fun MyRecyclerViewAdapter(context: Context, cursor: Cursor) {
+    fun MyRecyclerViewAdapter(context: Context, cursor: Cursor, sql:String) {
         this.context = context
         this.cursor = cursor
+        this.sql = sql
     }
-
-
     /**
      * Se "infla" la vista de los items.
      */
@@ -71,8 +72,7 @@ class RecyclerViewAdapter2 : RecyclerView.Adapter<RecyclerViewAdapter2.ViewHolde
         holder.compania.text = cursor.getString(4)
         holder.consola.text = cursor.getString(5)
         Glide.with(context).load(cursor.getString(6)).into(holder.imagen)
-        if(cursor.getInt(7) == 1)
-        {
+        if (cursor.getInt(7) == 1) {
             holder.noFavImageView.visibility = View.GONE
             holder.favImageView.visibility = View.VISIBLE
         }
@@ -106,11 +106,6 @@ class RecyclerViewAdapter2 : RecyclerView.Adapter<RecyclerViewAdapter2.ViewHolde
             this.favImageView = bindingItemsRV.favImageView
 
             view.setOnClickListener {
-                Toast.makeText(
-                    context,
-                    "${this.codigo.text}-${this.nombre.text} ${this.consola.text}",
-                    Toast.LENGTH_SHORT
-                ).show()
                 val intent = Intent(context, DetallesActivity::class.java).apply {
                     putExtra("codigo", codigo.text)
                     putExtra("nombre", nombre.text)
@@ -118,7 +113,7 @@ class RecyclerViewAdapter2 : RecyclerView.Adapter<RecyclerViewAdapter2.ViewHolde
                     putExtra("año", anyo.text)
                     putExtra("compañia", compania.text)
                     putExtra("consola", consola.text)
-                    cursor.moveToPosition(adapterPosition)
+                    cursor.moveToPosition(position)
                     putExtra("imagen", cursor.getString(6))
                 }
                 startActivity(context, intent, null)
@@ -149,14 +144,12 @@ class RecyclerViewAdapter2 : RecyclerView.Adapter<RecyclerViewAdapter2.ViewHolde
                 cursor.moveToPosition(adapterPosition)
                 var database = MyDBOpenHelper(context, null)
                 database.desmarcarFavorito(cursor.getInt(0))
-                favImageView.visibility = View.GONE
                 noFavImageView.visibility = View.VISIBLE
-                cursor = database.readableDatabase.rawQuery("SELECT * FROM juegos WHERE favorito = 1;", null)
+                favImageView.visibility = View.GONE
+                cursor = database.readableDatabase.rawQuery(sql, null)
                 notifyDataSetChanged()
             }
         }
-
-
         /**
          * Modo de acción contextual.
          */
@@ -164,7 +157,6 @@ class RecyclerViewAdapter2 : RecyclerView.Adapter<RecyclerViewAdapter2.ViewHolde
             // Método llamado al selección una opción del menú.
             override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?)
                     : Boolean {
-
                 return when (item!!.itemId) {
                     R.id.optionDelete -> {
                         val builder = AlertDialog.Builder(context)
@@ -172,10 +164,9 @@ class RecyclerViewAdapter2 : RecyclerView.Adapter<RecyclerViewAdapter2.ViewHolde
                         builder.setMessage("¿Seguro que quieres borrar el juego?")
                         builder.setPositiveButton(android.R.string.yes) { dialog, which ->
                             val db = MyDBOpenHelper(context, null)
-                            cursor.moveToPosition(adapterPosition)
                             db.delJuego(cursor.getInt(0))
                             cursor = db.readableDatabase.rawQuery(
-                                "SELECT * FROM juegos WHERE favorito = 1;", null
+                                sql, null
                             )
                             notifyItemRemoved(adapterPosition)
                             notifyItemRangeChanged(adapterPosition, getItemCount())
@@ -207,7 +198,6 @@ class RecyclerViewAdapter2 : RecyclerView.Adapter<RecyclerViewAdapter2.ViewHolde
                 }
             }
 
-
             // Llamado cuando al crear el modo acción a través de startActionMode().
             override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
                 //val inflater = mActivity?.menuInflater
@@ -229,7 +219,5 @@ class RecyclerViewAdapter2 : RecyclerView.Adapter<RecyclerViewAdapter2.ViewHolde
                 actionMode = null
             }
         }
-
-
     }
 }

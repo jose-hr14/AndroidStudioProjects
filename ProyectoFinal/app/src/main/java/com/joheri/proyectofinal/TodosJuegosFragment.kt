@@ -40,8 +40,8 @@ class TodosJuegosFragment : Fragment() {
         db = juegosDB.readableDatabase
         cursor = db.rawQuery("SELECT * FROM juegos;", null)
         // Se crea el adaptador con el resultado del cursor.
-        val myRecyclerViewAdapter = FavoritosRecyclerViewAdapter()
-        myRecyclerViewAdapter.MyRecyclerViewAdapter(requireActivity(), cursor)
+        val myRecyclerViewAdapter = MyRecyclerViewAdapter()
+        myRecyclerViewAdapter.MyRecyclerViewAdapter(requireActivity(), cursor, "SELECT * FROM juegos;")
         // Montamos el RecyclerView.
         binding.myRecyclerview.setHasFixedSize(true)
         binding.myRecyclerview.layoutManager = LinearLayoutManager(requireContext())
@@ -62,7 +62,6 @@ class TodosJuegosFragment : Fragment() {
         juego = Juego( "Pokémon Cristal", "RPG", 1998, "Nintendo", "Game Boy", "https://static.wikia.nocookie.net/espokemon/images/3/3b/Pokemon_Edici%C3%B3n_Cristal.jpg/revision/latest?cb=20160715093139")
         juegosDB.addJuego(juego)
     }
-
     override fun onResume() {
         super.onResume()
         setUpRecyclerView()

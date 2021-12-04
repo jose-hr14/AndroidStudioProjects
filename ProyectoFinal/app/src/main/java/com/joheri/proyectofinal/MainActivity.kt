@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.joheri.proyectofinal.databinding.ActivityMainBinding
 
 
@@ -41,20 +42,17 @@ class MainActivity : AppCompatActivity() {
         {
             val juego = Juego(binding.nombreET.text.toString(), binding.generoET.text.toString(), binding.anyoET.text.toString().toInt(), binding.companiaET.text.toString(), binding.consolaET.text.toString(), binding.caratulaET.text.toString())
             juegosDBHelper.addJuego(juego)
+            mostrarSnackBar("Juego añadido")
         }
         binding.bibliotecaButton.setOnClickListener()
         {
             val myIntent = Intent(this@MainActivity, NuevaBiblioteca::class.java)
             startActivity(myIntent)
         }
-        binding.button.setOnClickListener()
-        {
-            juegosDBHelper.readableDatabase
-        }
-        binding.button2.setOnClickListener()
-        {
-            juegosDBHelper.delJuego(3)
-        }
+    }
+    //Función que muestra con un snackbar el mensaje que se le pase como parámetro
+    private fun mostrarSnackBar(mensaje: String) {
+        Snackbar.make(binding.mainLayout, mensaje, Snackbar.LENGTH_LONG).show()
     }
     private fun getJuegos()
     {

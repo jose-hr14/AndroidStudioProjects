@@ -32,8 +32,8 @@ class FavoritosJuegosFragment : Fragment() {
         db = juegosDB.readableDatabase
         var cursor = db.rawQuery("SELECT * FROM juegos WHERE favorito = 1;", null)
         // Se crea el adaptador con el resultado del cursor.
-        val myRecyclerViewAdapter = RecyclerViewAdapter2()
-        myRecyclerViewAdapter.MyRecyclerViewAdapter(requireActivity(), cursor)
+        val myRecyclerViewAdapter = MyRecyclerViewAdapter()
+        myRecyclerViewAdapter.MyRecyclerViewAdapter(requireActivity(), cursor, "SELECT * FROM juegos WHERE favorito = 1;")
         // Montamos el RecyclerView.
         binding.myRecyclerview.setHasFixedSize(true)
         binding.myRecyclerview.layoutManager = LinearLayoutManager(requireContext())

@@ -41,8 +41,8 @@ class BibliotecaActivity : AppCompatActivity() {
         db = juegosDB.readableDatabase
         cursor = db.rawQuery("SELECT * FROM juegos;", null)
         // Se crea el adaptador con el resultado del cursor.
-        val myRecyclerViewAdapter = FavoritosRecyclerViewAdapter()
-        myRecyclerViewAdapter.MyRecyclerViewAdapter(this, cursor)
+        val myRecyclerViewAdapter = MyRecyclerViewAdapter()
+        myRecyclerViewAdapter.MyRecyclerViewAdapter(this, cursor, "SELECT * FROM juegos;")
         // Montamos el RecyclerView.
         binding.myRecyclerview.setHasFixedSize(true)
         binding.myRecyclerview.layoutManager = LinearLayoutManager(this)

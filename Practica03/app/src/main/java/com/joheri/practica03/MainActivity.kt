@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
 
         //Vinculamos el adapter del viewpager con el viewPager
         viewPager2.adapter = adapter
-
         //Cargamos las pestañas del labLayout en nuestra main activity
         TabLayoutMediator(binding.tabLayout, viewPager2) { tab, position ->
             tab.text = adapter.getPageTitle(position)

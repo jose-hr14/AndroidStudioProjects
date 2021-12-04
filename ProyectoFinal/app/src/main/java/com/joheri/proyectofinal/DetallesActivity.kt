@@ -32,11 +32,6 @@ class DetallesActivity : AppCompatActivity() {
         binding.companiaET2.setText(intent.getStringExtra("compañia"))
         binding.consolaET2.setText(intent.getStringExtra("consola"))
 
-        binding.editarButton.setOnClickListener()
-        {
-            modoEditar()
-        }
-
         binding.actualizarButton.setOnClickListener()
         {
             val db = MyDBOpenHelper(this, null)
@@ -44,13 +39,6 @@ class DetallesActivity : AppCompatActivity() {
             db.updateJuego(juego.codigo!!, juego )
             modoDetalles()
         }
-
-        binding.borrarButton.setOnClickListener()
-        {
-            confirmarBorrado("¿Seguro que quieres borrar el juego seleccionado?", "Confirmación")
-            finish()
-        }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -90,9 +78,7 @@ class DetallesActivity : AppCompatActivity() {
         binding.companiaTV2.visibility = View.INVISIBLE
         binding.consolaTV2.visibility = View.INVISIBLE
 
-        binding.borrarButton.visibility = View.VISIBLE
         binding.actualizarButton.visibility = View.VISIBLE
-        binding.editarButton.visibility = View.INVISIBLE
     }
 
     private fun modoDetalles()
@@ -109,9 +95,7 @@ class DetallesActivity : AppCompatActivity() {
         binding.companiaTV2.visibility = View.VISIBLE
         binding.consolaTV2.visibility = View.VISIBLE
 
-        binding.borrarButton.visibility = View.INVISIBLE
         binding.actualizarButton.visibility = View.INVISIBLE
-        binding.editarButton.visibility = View.VISIBLE
 
         binding.nombreTV2.setText(binding.nombreET2.text)
         binding.generoTV2.setText(binding.generoET2.text)
