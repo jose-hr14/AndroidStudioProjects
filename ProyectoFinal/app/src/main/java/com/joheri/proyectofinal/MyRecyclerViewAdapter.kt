@@ -28,9 +28,7 @@ class MyRecyclerViewAdapter :
         this.cursor = cursor
         this.sql = sql
     }
-    /**
-     * Se "infla" la vista de los items.
-     */
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -46,22 +44,14 @@ class MyRecyclerViewAdapter :
         )
     }
 
-    override fun getItemId(position: Int): Long {
-        return super.getItemId(position)
-    }
-
     override fun getItemCount(): Int {
         return cursor.count
     }
 
-    /**
-     * Se completan los datos de cada vista mediante ViewHolder.
-     */
     override fun onBindViewHolder(
         holder: ViewHolder,
         position: Int
     ) {
-        // Importante para recorrer el cursor.
         cursor.moveToPosition(position)
         Log.d("RECYCLERVIEW", "onBindViewHolder")
         // Se asignan los valores a los elementos de la UI.
@@ -79,7 +69,6 @@ class MyRecyclerViewAdapter :
     }
 
     inner class ViewHolder : RecyclerView.ViewHolder {
-        // Creamos las referencias de la UI.
         val codigo: TextView
         val nombre: TextView
         val genero: TextView
@@ -113,7 +102,7 @@ class MyRecyclerViewAdapter :
                     putExtra("año", anyo.text)
                     putExtra("compañia", compania.text)
                     putExtra("consola", consola.text)
-                    cursor.moveToPosition(position)
+                    cursor.moveToPosition(adapterPosition)
                     putExtra("imagen", cursor.getString(6))
                 }
                 startActivity(context, intent, null)
@@ -121,7 +110,6 @@ class MyRecyclerViewAdapter :
             itemView.setOnLongClickListener {
                 when (actionMode) {
                     null -> {
-                        // Se lanza el ActionMode.
                         cursor.moveToPosition(adapterPosition)
                         actionMode = it.startActionMode(actionModeCallback)
                         it.isSelected = true
@@ -150,11 +138,7 @@ class MyRecyclerViewAdapter :
                 notifyDataSetChanged()
             }
         }
-        /**
-         * Modo de acción contextual.
-         */
         private val actionModeCallback = object : ActionMode.Callback {
-            // Método llamado al selección una opción del menú.
             override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?)
                     : Boolean {
                 return when (item!!.itemId) {
@@ -197,8 +181,6 @@ class MyRecyclerViewAdapter :
                     else -> false
                 }
             }
-
-            // Llamado cuando al crear el modo acción a través de startActionMode().
             override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
                 //val inflater = mActivity?.menuInflater
                 // Así no necesito la activity
@@ -207,14 +189,11 @@ class MyRecyclerViewAdapter :
                 return true
             }
 
-            // Se llama cada vez que el modo acción se muestra, siempre
-            // después de onCreateActionMode().
             override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?)
                     : Boolean {
                 return false
             }
 
-            // Se llama cuando el usuario sale del modo de acción.
             override fun onDestroyActionMode(mode: ActionMode?) {
                 actionMode = null
             }

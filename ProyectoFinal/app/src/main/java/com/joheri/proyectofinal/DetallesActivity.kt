@@ -47,16 +47,13 @@ class DetallesActivity : AppCompatActivity() {
         return true
     }
 
-    /**
-     * Método encargado de gestionar las opciones pulsadas del menú.
-     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.editarMenu -> {
                 modoEditar()
                 true
             }
-            R.id.borrarMenu -> { // Esta opción no haría falta, ya que abre un submenú.
+            R.id.borrarMenu -> {
                 confirmarBorrado("¿Seguro que quieres borrar el juego seleccionado?", "Confirmación")
                 true
             }
@@ -111,11 +108,8 @@ class DetallesActivity : AppCompatActivity() {
     private fun confirmarBorrado(message: String, title: String) {
         val builder = AlertDialog.Builder(this)
         builder.apply {
-            // Se asigna un título.
             setTitle(title)
-            // Se asgina el cuerpo del mensaje.
             setMessage(message)
-            // Se define el comportamiento de los botones.
             setPositiveButton(android.R.string.ok) {_, _, ->
                 val db = MyDBOpenHelper(context, null)
                 val juego = Juego(intent.getStringExtra("codigo")?.toInt(), binding.nombreET2.text.toString(), binding.generoET2.text.toString(), binding.anyoET2.text.toString().toInt(), binding.companiaET2.text.toString(), binding.consolaET2.text.toString(), intent.getStringExtra("imagen"))
@@ -126,7 +120,6 @@ class DetallesActivity : AppCompatActivity() {
             setNegativeButton(android.R.string.no) { _, _ ->
             }
         }
-        // Se muestra el AlertDialog.
         builder.show()
     }
 }

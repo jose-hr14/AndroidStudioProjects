@@ -28,7 +28,6 @@ class TodosJuegosFragment : Fragment() {
 
     fun setUpRecyclerView()
     {
-        // Se instancia la BD en modo lectura y se crea la SELECT.
         db = juegosDB.readableDatabase
         var cursor: Cursor = db.rawQuery("SELECT count(*) FROM juegos;", null)
         cursor.moveToNext()
@@ -39,10 +38,8 @@ class TodosJuegosFragment : Fragment() {
         }
         db = juegosDB.readableDatabase
         cursor = db.rawQuery("SELECT * FROM juegos;", null)
-        // Se crea el adaptador con el resultado del cursor.
         val myRecyclerViewAdapter = MyRecyclerViewAdapter()
         myRecyclerViewAdapter.MyRecyclerViewAdapter(requireActivity(), cursor, "SELECT * FROM juegos;")
-        // Montamos el RecyclerView.
         binding.myRecyclerview.setHasFixedSize(true)
         binding.myRecyclerview.layoutManager = LinearLayoutManager(requireContext())
         binding.myRecyclerview.adapter = myRecyclerViewAdapter

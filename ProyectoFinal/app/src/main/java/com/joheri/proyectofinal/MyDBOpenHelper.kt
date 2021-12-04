@@ -15,10 +15,6 @@ class MyDBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         val TABLA_JUEGOS = "juegos"
     }
 
-    /**
-     * Este método es llamado cuando se crea la base por primera vez. Debe
-     * producirse la creación de todas las tablas que formen la base de datos.
-     */
     override fun onCreate(db: SQLiteDatabase?) {
         try {
             val crearTablaJuegos = "CREATE TABLE juegos (codigo INTEGER PRIMARY KEY AUTOINCREMENT, nombre TEXT, genero TEXT, año INTEGER, compañia INTEGER, consola TEXT, caratula_url TEXT, favorito INTEGER);"
@@ -28,11 +24,6 @@ class MyDBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         }
     }
 
-    /**
-     * Este método se invocará cuando la base de datos necesite ser actualizada.
-     * Se utiliza para hacer DROPs, añadir tablas o cualquier acción que
-     * actualice el esquema de la BD.
-     */
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         try {
             val dropTablaJuegos = "DROP TABLE IF EXISTS $TABLA_JUEGOS"
@@ -43,19 +34,12 @@ class MyDBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         }
     }
 
-    /**
-     * Método opcional. Se llamará a este método después de abrir la base de
-     * datos, antes de ello, comprobará si está en modo lectura. Se llama justo
-     * después de establecer la conexión y crear el esquema.
-     */
     override fun onOpen(db: SQLiteDatabase?) {
         super.onOpen(db)
     }
 
     fun addJuego(juego: Juego) {
-        // Se crea un ArrayMap<>() haciendo uso de ContentValues().
         val data = ContentValues()
-        //data.put(JUEGOS_CODIGO, juego.codigo)
         data.put("nombre", juego.nombre)
         data.put("genero", juego.genero)
         data.put("año", juego.anyo)
@@ -63,8 +47,7 @@ class MyDBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
         data.put("consola", juego.consola)
         data.put("caratula_url", juego.caratulaURL)
         data.put("favorito", 0)
-        //this.writableDatabase.execSQL("INSERT INTO juegos (nombre, genero, año, compañia, consola) VALUES('nombre', 'genero', 'año', 'compañia', 'cosola'"));
-        // Se abre la BD en modo escritura.
+
         val db = this.writableDatabase
         db.insert(TABLA_JUEGOS, null, data)
         db.close()
@@ -73,24 +56,17 @@ class MyDBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     fun delJuego(identifier: Int) {
         val args = arrayOf(identifier.toString())
 
-        // Se abre la BD en modo escritura.
         val db = this.writableDatabase
 
-        // Se puede elegir un sistema u otro.
-        //val result = db.delete(TABLA_JUEGOS, "$JUEGOS_CODIGO = $identifier", args)
         db.execSQL("DELETE FROM juegos where codigo = $identifier")
 
         db.close()
 
     }
 
-    /**
-     * Método para actualizar el nombre de un amigo de la tabla por el id.
-     */
     fun updateJuego(identifier: Int, juego: Juego) {
         val args = arrayOf(identifier.toString())
 
-        // Se crea un ArrayMap<>() con los datos nuevos.
         val data = ContentValues()
         data.put("nombre", juego.nombre)
         data.put("genero", juego.genero)
@@ -107,7 +83,6 @@ class MyDBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     fun marcarFavorito(identifier: Int) {
         val args = arrayOf(identifier.toString())
 
-        // Se crea un ArrayMap<>() con los datos nuevos.
         val data = ContentValues()
         data.put("favorito", 1)
 
@@ -119,7 +94,6 @@ class MyDBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
     fun desmarcarFavorito(identifier: Int) {
         val args = arrayOf(identifier.toString())
 
-        // Se crea un ArrayMap<>() con los datos nuevos.
         val data = ContentValues()
         data.put("favorito", 0)
 

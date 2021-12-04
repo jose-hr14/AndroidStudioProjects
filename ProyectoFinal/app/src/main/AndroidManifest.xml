@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoFinal">
         <activity
-            android:name=".NuevaBiblioteca"
+            android:name=".NuevaBibliotecaActivity"
             android:parentActivityName=".MainActivity"
             android:label="Biblioteca juegos"
             android:exported="true" />
@@ -21,12 +21,7 @@
             android:name=".DetallesActivity"
             android:label="Detalles juego"
             android:exported="false"
-            android:parentActivityName=".NuevaBiblioteca" />
-        <activity
-            android:name=".BibliotecaActivity"
-            android:exported="false"
-            android:label="Biblioteca juegos"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".NuevaBibliotecaActivity" />
         <activity
             android:name=".MainActivity"
             android:label="Introducir juegos"
